@@ -1,0 +1,19 @@
+# @format
+
+# Setup custom dev env
+image:
+  file: .gitpod.Dockerfile
+
+# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
+tasks:
+  - init: (cd frontend; make setup) # runs during prebuild
+    command: (cd frontend; make start)
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 4200
+    onOpen: open-preview
+  - port: 4210
+  - port: 4220
+  - port: 4230
+  - port: 8080 # reserve for api
