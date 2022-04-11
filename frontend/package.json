@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "db:pull": "prisma db pull",
+    "db:migrate": "prisma migrate dev"
   },
   "private": true,
   "packageManager": "yarn@3.2.0",
@@ -17,6 +19,7 @@
     "@adobe/react-spectrum": "^3.16.5",
     "@nrwl/next": "13.10.1",
     "@preact/compat": "^17.0.3",
+    "@prisma/client": "3.12.0",
     "@reach/skip-nav": "^0.16.0",
     "@react-spectrum/actiongroup": "^3.4.3",
     "@react-spectrum/breadcrumbs": "^3.2.7",
@@ -164,6 +167,7 @@
     "postcss-preset-env": "^7.4.3",
     "postcss-svg": "^3.0.0",
     "prettier": "^2.6.2",
+    "prisma": "^3.12.0",
     "react-test-renderer": "18.0.0",
     "stylelint": "^14.6.1",
     "stylelint-config-prettier": "^9.0.3",

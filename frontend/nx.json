@@ -1,5 +1,5 @@
 {
-  "npmScope": "frontend",
+  "npmScope": "@compendium/frontend",
   "affected": {
     "defaultBase": "main"
   },
