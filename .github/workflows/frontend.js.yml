@@ -26,6 +26,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - run: make setup
-    - run: make lint
-    - run: make test
+    - run: (cd frontend; make setup)
+    - run: (cd frontend; make lint)
+    - run: (cd frontend; make test)
