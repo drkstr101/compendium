@@ -1,3 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UiMoleculeTree should render successfully 1`] = `<div />`;
+exports[`UiMoleculeTree should render successfully 1`] = `
+<div>
+  <div
+    class="TreeView"
+    style="padding: 0px; overflow: auto;"
+    tabindex="0"
+  >
+    <div
+      role="presentation"
+      style="width: 0px; height: 0px; pointer-events: auto; position: relative;"
+    />
+  </div>
+</div>
+`;

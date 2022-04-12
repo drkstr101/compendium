@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "@adobe/react-spectrum": "^3.16.5",
+    "@heroicons/react": "^1.0.6",
     "@mdx-js/rollup": "^2.1.1",
     "@nrwl/next": "13.10.1",
     "@preact/compat": "^17.0.3",
