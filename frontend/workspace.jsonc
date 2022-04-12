@@ -1,7 +1,7 @@
 /**
  * this is the main configuration file of your bit workspace.
  * for full documentation, please see: https://bit.dev/docs/workspace/workspace-configuration
- **/{
+ **/ {
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
   /**
    * main configuration of the Bit workspace.
@@ -14,7 +14,7 @@
     /**
      * set the icon to be shown on the Bit server.
      **/
-    "icon": "https://watheia.app/assets/icon.png",
+    "icon": "https://www.datocms-assets.com/64528/1649738742-android-chrome-192x192.png",
     /**
      * default directory to place a component during `bit import` and `bit create`.
      * the following placeholders are available:
@@ -75,6 +75,9 @@
        * uncomment to apply the chosen environment on all components.
        **/
       // "teambit.react/react": { }
+    },
+    "{content/**}": {
+      "teambit.mdx/mdx": {}
     }
   }
 }

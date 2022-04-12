@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@compendium/frontend.theme.styles": ["libs/theme/styles/src/index.css"],
+      "@compendium/frontend.content.readme": ["libs/content/readme/src/index.ts"],
+      "@compendium/frontend.test.utils": ["libs/test/utils/src/index.ts"],
+      "@compendium/frontend.types": ["libs/types/src/index.ts"],
+      "@compendium/frontend.ui.layout": ["libs/ui/layout/src/index.ts"],
+      "@compendium/frontend.ui.molecule.tree": ["libs/ui/molecule/tree/src/index.ts"],
+      "@compendium/frontend.ui.organism.sidenav": ["libs/ui/organism/sidenav/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,184 @@
+:root {
+  --sidenav-item-padding-y: var(--global-dimension-size-65);
+}
+
+.SideNav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+
+  height: 100%;
+}
+
+.SideNav-item {
+  list-style-type: none;
+
+  margin: var(--sidenav-item-gap) 0;
+}
+
+.SideNav-itemLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+
+  inline-size: 100%;
+  min-block-size: var(--sidenav-item-height);
+
+  padding: var(--sidenav-item-padding-y) var(--sidenav-item-padding-x);
+
+  border-radius: var(--sidenav-item-border-radius);
+
+  font-size: var(--sidenav-item-text-size);
+  font-weight: var(--sidenav-item-font-weight);
+  font-style: normal;
+  text-decoration: none;
+
+  word-break: break-word;
+  hyphens: auto;
+
+  cursor: pointer;
+
+  transition: background-color var(--global-animation-duration-100) ease-out,
+    color var(--global-animation-duration-100) ease-out;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-ring::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    border: var(--tabs-focus-ring-size) solid transparent;
+    border-radius: var(--sidenav-item-border-radius);
+  }
+
+  .SideNav-itemIcon {
+    margin-inline-end: var(--sidenav-icon-gap);
+  }
+}
+
+.SideNav-heading {
+  block-size: var(--sidenav-header-height);
+  line-height: var(--sidenav-header-height);
+
+  margin: var(--sidenav-header-gap-top) 0 var(--sidenav-header-gap-bottom) 0;
+  padding: 0 var(--sidenav-header-padding-x);
+
+  border-radius: var(--sidenav-header-border-radius);
+
+  text-align: start;
+  font-size: var(--sidenav-header-text-size);
+  font-weight: var(--sidenav-header-font-weight);
+  font-style: normal;
+  letter-spacing: var(--sidenav-header-letter-spacing);
+
+  text-transform: uppercase;
+}
+
+.SideNav--multiLevel {
+  .SideNav-itemLink {
+    font-weight: var(--sidenav-multilevel-main-item-font-weight);
+  }
+
+  .SideNav {
+    margin: 0;
+    padding: 0;
+
+    .SideNav-itemLink {
+      font-weight: var(--sidenav-item-font-weight);
+
+      padding-inline-start: calc(
+        var(--sidenav-multilevel-item-indentation-level1) + var(--sidenav-item-padding-x)
+      );
+    }
+
+    .SideNav {
+      .SideNav-itemLink {
+        padding-inline-start: calc(
+          var(--sidenav-multilevel-item-indentation-level2) + var(--sidenav-item-padding-x)
+        );
+      }
+    }
+  }
+}
+
+.SideNav-item {
+  &.is-selected {
+    > .SideNav-itemLink {
+      color: var(--sidenav-item-text-color-selected);
+      background-color: var(--sidenav-item-background-color-selected);
+    }
+  }
+
+  .is-active {
+    > .SideNav-itemLink {
+      background-color: var(--sidenav-item-background-color-down);
+    }
+  }
+
+  &.is-disabled {
+    /* Disable all children */
+    .SideNav-itemLink {
+      background-color: var(--sidenav-item-background-color-disabled);
+      color: var(--sidenav-item-text-color-disabled);
+
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+}
+
+.SideNav-itemLink {
+  background-color: var(--sidenav-item-background-color);
+  color: var(--sidenav-item-text-color);
+
+  &:hover {
+    background-color: var(--sidenav-item-background-color-hover);
+    color: var(--sidenav-item-text-color-hover);
+  }
+
+  &:active {
+    background-color: var(--sidenav-item-background-color-down);
+  }
+
+  &:focus-ring {
+    background-color: var(--sidenav-item-background-color-key-focus);
+    color: var(--sidenav-item-text-color-key-focus);
+
+    &::before {
+      border-color: var(--sidenav-item-border-color-key-focus);
+    }
+  }
+}
+
+.SideNav-heading {
+  color: var(--sidenav-header-text-color);
+}
+
+@media (forced-colors: active) {
+  .SideNav-item {
+    forced-color-adjust: none;
+    --sidenav-item-text-color-selected: HighlightText;
+    --sidenav-item-background-color-selected: Highlight;
+    --sidenav-item-background-color-down: Highlight;
+    --sidenav-item-background-color-disabled: ButtonFace;
+    --sidenav-item-text-color-disabled: GrayText;
+    --sidenav-item-background-color: ButtonFace;
+    --sidenav-item-text-color: ButtonText;
+    --sidenav-item-background-color-hover: ButtonFace;
+    --sidenav-item-text-color-hover: ButtonText;
+    --sidenav-item-background-color-down: ButtonFace;
+    --sidenav-item-background-color-key-focus: ButtonFace;
+    --sidenav-item-text-color-key-focus: ButtonText;
+    --sidenav-item-border-color-key-focus: ButtonText;
+    --sidenav-header-text-color: ButtonText;
+  }
+}

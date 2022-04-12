@@ -33,14 +33,16 @@ bit-init:
 	bit config set interactive false
 	bit init --harmony
 
-node_modules: bit-init
+node_modules:
 	bit install
 
 bit-build: node_modules
 	bit compile
 	bit build --log=info
 
-setup: node_modules
+setup:
+	$(MAKE) bit-init
+	$(MAKE) node_modules
 
 lint: node_modules
 	nx run-many --all --target lint

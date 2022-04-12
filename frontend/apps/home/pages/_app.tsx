@@ -1,18 +1,30 @@
+import { SSRProvider } from '@react-aria/ssr';
+import { Provider } from '@react-spectrum/provider';
+import { theme } from '@react-spectrum/theme-default';
+// import { AuthProvider } from '@watheia/waweb.auth';
+// import { MessageProvider } from '@watheia/waweb.message';
 import { AppProps } from 'next/app';
-import Head from 'next/head';
-import './styles.css';
+import { useEffect, useState } from 'react';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+// Import any global styles here...
+import '@compendium/frontend.theme.styles';
+
+function WaNextApp({ Component, pageProps }: AppProps) {
+  // keep color scheme in sync with tailwindcss
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('dark');
+  useEffect(() => {
+    window.document.body.classList?.remove('loading');
+    setColorScheme(
+      window.document.body.getAttribute('data-theme') === 'light' ? 'light' : 'dark'
+    );
+  }, []);
   return (
-    <>
-      <Head>
-        <title>Welcome to home!</title>
-      </Head>
-      <main className="app">
+    <SSRProvider>
+      <Provider theme={theme} colorScheme={colorScheme} minHeight="100%">
         <Component {...pageProps} />
-      </main>
-    </>
+      </Provider>
+    </SSRProvider>
   );
 }
 
-export default CustomApp;
+export default WaNextApp;

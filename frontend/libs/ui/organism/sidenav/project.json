@@ -1,0 +1,43 @@
+{
+  "root": "libs/ui/organism/sidenav",
+  "sourceRoot": "libs/ui/organism/sidenav/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ui/organism/sidenav",
+        "tsConfig": "libs/ui/organism/sidenav/tsconfig.lib.json",
+        "project": "libs/ui/organism/sidenav/package.json",
+        "entryFile": "libs/ui/organism/sidenav/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/ui/organism/sidenav/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ui/organism/sidenav/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/ui/organism/sidenav"],
+      "options": {
+        "jestConfig": "libs/ui/organism/sidenav/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

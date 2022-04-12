@@ -9,5 +9,11 @@
  */
 
 {
+    "content/readme": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "libs/content/readme/src"
+    },
     "$schema-version": "14.9.0"
 }
