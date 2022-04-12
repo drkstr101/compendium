@@ -50,13 +50,13 @@ lint: node_modules
 test: node_modules
 	nx run-many --all --target test
 
-build: node_modules bit-build
+build: node_modules
 	nx run-many --all --target build --verbose
 
 start: node_modules
 	nx run-many --all --target serve --parallel
 
-home: node_modules bit-build
+home: node_modules
 	nx run home:build:production --verbose --skip-nx-cache
 
 docs/depgraph.dot: node_modules
