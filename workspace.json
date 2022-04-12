@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "libs/api",
+    "home": "apps/home",
+    "home-e2e": "apps/home-e2e",
+    "types": "libs/types",
+    "ui": "libs/ui"
+  }
+}
