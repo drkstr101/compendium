@@ -1,0 +1,146 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+@import '~@compendium/theme.styles.overlay';
+
+:root {
+  --popover-target-offset: 13px;
+  --popover-dialog-padding: 30px 29px;
+  --popover-dialog-min-width: 270px;
+
+  --popover-min-width: var(--global-dimension-size-400);
+  --popover-min-height: var(--global-dimension-size-400);
+
+  /* Popover tip positioning for left/right oriented popovers (-11px/-25px) */
+  --popover-tip-horizontal-offset: calc(var(--global-dimension-size-250) * -1);
+  /* Popover tip positioning for top/bottom oriented popovers (6px/8px) */
+  --popover-tip-vertical-offset: var(--global-dimension-size-75);
+
+  --popover-tip-triangle-top-offset: calc(var(--global-dimension-size-225) * -1);
+}
+
+.Popover {
+  @inherit: %overlay;
+
+  /* Be a flexbox to allow a full sized content area that scrolls */
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  min-width: var(--popover-min-width);
+  min-height: var(--popover-min-height);
+
+  position: absolute;
+
+  border-style: solid;
+  border-width: var(--popover-border-size);
+  border-radius: var(--popover-border-radius);
+
+  outline: none; /* Hide focus outline */
+  box-sizing: border-box;
+
+  &.is-open {
+    @inherit: %overlay--open;
+  }
+}
+
+.Popover-tip {
+  position: absolute;
+  --popover-tip-size: var(--popover-tip-width);
+  --popover-tip-borderWidth: var(--popover-border-size);
+  /* https://stackoverflow.com/questions/44170229/how-to-prevent-half-pixel-svg-shift-on-high-pixel-ratio-devices-retina */
+  -webkit-transform: translate(0, 0);
+
+  .Popover-tip-triangle {
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: var(--popover-border-size);
+  }
+}
+
+.Popover--dialog {
+  min-width: var(--popover-dialog-min-width);
+  padding: var(--popover-dialog-padding);
+}
+
+.Popover--left {
+  &.Popover--withTip {
+    margin-right: var(--popover-target-offset);
+  }
+
+  &.is-open {
+    @inherit: %overlay--left--open;
+  }
+  .Popover-tip {
+    left: 100%;
+  }
+}
+
+.Popover--right {
+  &.Popover--withTip {
+    margin-left: var(--popover-target-offset);
+  }
+
+  &.is-open {
+    @inherit: %overlay--right--open;
+  }
+  .Popover-tip {
+    right: 100%;
+    transform: scaleX(-1);
+  }
+}
+
+/* Center the tip by default */
+.Popover--left,
+.Popover--right {
+  .Popover-tip {
+    top: 50%;
+    margin-top: calc(var(--global-dimension-size-150) * -1);
+  }
+}
+
+.Popover--bottom {
+  &.Popover--withTip {
+    margin-top: var(--popover-target-offset);
+  }
+
+  &.is-open {
+    @inherit: %overlay--bottom--open;
+  }
+  .Popover-tip {
+    bottom: 100%;
+    transform: scaleY(-1);
+  }
+}
+
+.Popover--top {
+  &.Popover--withTip {
+    margin-bottom: var(--popover-target-offset);
+  }
+
+  &.is-open {
+    @inherit: %overlay--top--open;
+  }
+  .Popover-tip {
+    top: 100%;
+  }
+}
+
+/* Center the tip by default */
+.Popover--bottom,
+.Popover--top {
+  .Popover-tip {
+    left: 50%;
+    margin-left: calc(var(--global-dimension-size-150) * -1);
+  }
+}

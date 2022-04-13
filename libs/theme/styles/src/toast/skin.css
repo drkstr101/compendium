@@ -1,0 +1,74 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.Toast {
+  background-color: var(--toast-background-color);
+  color: var(--toast-background-color);
+}
+
+.Toast-content {
+  color: var(--toast-text-color);
+}
+
+.Toast-typeIcon {
+  color: white;
+}
+
+.Toast-buttons {
+  border-inline-start-color: rgba(255, 255, 255, 0.2);
+}
+
+.Toast--warning {
+  background-color: var(--toast-warning-background-color);
+  color: var(--toast-warning-background-color);
+
+  .Toast-closeButton {
+    &:focus-ring:not(:active) {
+      color: var(--toast-warning-background-color);
+    }
+  }
+}
+
+.Toast--negative,
+/** @deprecated */.Toast--error {
+  background-color: var(--toast-error-background-color);
+  color: var(--toast-error-background-color);
+
+  .Toast-closeButton {
+    &:focus-ring:not(:active) {
+      color: var(--toast-error-background-color);
+    }
+  }
+}
+
+.Toast--info {
+  background-color: var(--toast-info-background-color);
+  color: var(--toast-info-background-color);
+
+  .Toast-closeButton {
+    &:focus-ring:not(:active) {
+      color: var(--toast-info-background-color);
+    }
+  }
+}
+
+.Toast--positive,
+/** @deprecated */.Toast--success {
+  background-color: var(--toast-positive-background-color);
+  color: var(--toast-positive-background-color);
+
+  .Toast-closeButton {
+    &:focus-ring:not(:active) {
+      color: var(--toast-positive-background-color);
+    }
+  }
+}

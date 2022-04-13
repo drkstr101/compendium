@@ -1,0 +1,43 @@
+{
+  "root": "libs/dev/docs/css-module-preview",
+  "sourceRoot": "libs/dev/docs/css-module-preview/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/dev/docs/css-module-preview",
+        "tsConfig": "libs/dev/docs/css-module-preview/tsconfig.lib.json",
+        "project": "libs/dev/docs/css-module-preview/package.json",
+        "entryFile": "libs/dev/docs/css-module-preview/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/dev/docs/css-module-preview/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dev/docs/css-module-preview/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/dev/docs/css-module-preview"],
+      "options": {
+        "jestConfig": "libs/dev/docs/css-module-preview/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

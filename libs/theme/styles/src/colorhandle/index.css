@@ -1,0 +1,81 @@
+:root {
+  /* redefine this var so it can be used in skin.css */
+  --colorhandle-background-offset: calc(-1 * var(--global-dimension-static-size-25));
+  --colorhandle-checkerboard-size: var(--global-dimension-static-size-100);
+
+  --colorhandle-animation-duration: var(--global-animation-duration-100);
+  --colorhandle-animation-easing: ease-in-out;
+
+  --colorhandle-hitarea-size: var(--global-dimension-size-300);
+  --colorhandle-hitarea-radius: 100%;
+}
+
+%ColorControl-handle--focused {
+  /* Bigger handle when focused */
+  width: calc(var(--colorhandle-size) * 2);
+  height: calc(var(--colorhandle-size) * 2);
+
+  margin-left: calc(-1 * var(--colorhandle-size));
+  margin-top: calc(-1 * var(--colorhandle-size));
+}
+
+.ColorHandle {
+  display: block;
+  position: absolute;
+  z-index: 1; /* Be above */
+  box-sizing: border-box;
+  width: var(--colorhandle-size);
+  height: var(--colorhandle-size);
+
+  margin-left: calc(-1 * calc(var(--colorhandle-size) / 2));
+  margin-top: calc(-1 * calc(var(--colorhandle-size) / 2));
+
+  border-width: var(--colorhandle-inner-border-size);
+  border-style: solid;
+
+  background-size: var(--global-dimension-static-size-200)
+    var(--global-dimension-static-size-200);
+  background-position: var(--colorhandle-background-offset) var(--colorhandle-background-offset),
+    var(--colorhandle-background-offset)
+      calc(var(--colorhandle-checkerboard-size) + var(--colorhandle-background-offset)),
+    calc(var(--colorhandle-checkerboard-size) + var(--colorhandle-background-offset))
+      calc(-1 * var(--colorhandle-checkerboard-size) + var(--colorhandle-background-offset)),
+    calc(-1 * var(--colorhandle-checkerboard-size) + var(--colorhandle-background-offset))
+      var(--colorhandle-background-offset);
+
+  transition: width var(--colorhandle-animation-duration) var(--colorhandle-animation-easing),
+    height var(--colorhandle-animation-duration) var(--colorhandle-animation-easing),
+    border-width var(--colorhandle-animation-duration) var(--colorhandle-animation-easing),
+    margin-left var(--colorhandle-animation-duration) var(--colorhandle-animation-easing),
+    margin-top var(--colorhandle-animation-duration) var(--colorhandle-animation-easing);
+
+  &,
+  &:after {
+    border-radius: 100%;
+  }
+
+  &:after {
+    content: '';
+    left: calc(50% - calc(var(--colorhandle-hitarea-size) / 2));
+    top: calc(50% - calc(var(--colorhandle-hitarea-size) / 2));
+    position: absolute;
+    display: block;
+    width: var(--colorhandle-hitarea-size);
+    height: var(--colorhandle-hitarea-size);
+  }
+
+  &.is-focused,
+  &.focus-ring {
+    @extend %ColorControl-handle--focused;
+  }
+
+  &.is-disabled {
+    pointer-events: none;
+  }
+}
+
+.ColorHandle-color {
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}

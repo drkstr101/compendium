@@ -1,0 +1,128 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.Calendar-prevMonth {
+  color: var(--calendar-button-icon-color);
+}
+
+.Calendar-nextMonth {
+  color: var(--calendar-button-icon-color);
+}
+
+.Calendar-dayOfWeek {
+  color: var(--calendar-day-title-text-color);
+}
+
+.Calendar-date {
+  --calendar-day-background-color-cap-selected: var(--global-color-blue-400);
+  --calendar-day-background-color-cap-selected-hover: var(--global-color-blue-500);
+  --calendar-day-background-color-cap-selected-down: var(--global-color-blue-600);
+  --calendar-day-text-color-cap-selected: white;
+  --calendar-day-text-color-cap-selected-hover: white;
+  --calendar-day-today-background-color: var(--global-color-gray-300);
+  --calendar-day-today-background-color-hover: var(--global-color-gray-400);
+  --calendar-day-today-background-color-down: var(--global-color-gray-500);
+
+  --background: transparent;
+  background: var(--background);
+
+  &.is-range-selection {
+    background: var(--calendar-day-background-color-selected);
+
+    &:after {
+      background: var(--background);
+    }
+  }
+
+  &.is-today {
+    color: var(--calendar-day-today-text-color);
+    border-color: var(--calendar-day-today-background-color);
+    --background: var(--calendar-day-today-background-color);
+  }
+
+  &.is-selected:not(.is-range-selection),
+  &.is-selection-start,
+  &.is-selection-end {
+    color: var(--calendar-day-text-color-cap-selected);
+    --background: var(--calendar-day-background-color-cap-selected);
+  }
+
+  &:hover {
+    color: var(--calendar-day-text-color-hover);
+    --background: var(--calendar-day-background-color-hover);
+
+    &.is-range-selection {
+      color: var(--calendar-day-text-color-selected-hover);
+      --background: var(--alias-highlight-selected);
+    }
+
+    &.is-today {
+      --background: var(--calendar-day-today-background-color-hover);
+    }
+
+    &.is-selected:not(.is-range-selection),
+    &.is-selection-start,
+    &.is-selection-end {
+      color: var(--calendar-day-text-color-cap-selected-hover);
+      --background: var(--calendar-day-background-color-cap-selected-hover);
+    }
+  }
+
+  &.is-pressed {
+    color: var(--calendar-day-text-color-hover);
+    --background: var(--calendar-day-background-color-down);
+
+    &.is-range-selection {
+      color: var(--calendar-day-text-color-selected-hover);
+      --background: var(--alias-highlight-selected-hover);
+    }
+
+    &.is-today {
+      --background: var(--calendar-day-today-background-color-down);
+    }
+
+    &.is-selected:not(.is-range-selection),
+    &.is-selection-start,
+    &.is-selection-end {
+      color: var(--calendar-day-text-color-cap-selected-hover);
+      --background: var(--calendar-day-background-color-cap-selected-down);
+    }
+  }
+
+  &.is-focused {
+    &:before {
+      box-shadow: 0 0 0 var(--calendar-day-border-size-key-focus)
+        var(--calendar-day-border-color-key-focus);
+    }
+  }
+
+  &.is-disabled {
+    &,
+    &.is-today {
+      --background: var(--calendar-day-background-color-disabled);
+    }
+
+    &,
+    &.is-today,
+    &.is-selected {
+      color: var(--calendar-day-text-color-disabled);
+    }
+
+    &.is-range-selection {
+      background: var(--global-color-gray-200);
+    }
+
+    &.is-selected {
+      --background: var(--global-color-gray-200);
+    }
+  }
+}

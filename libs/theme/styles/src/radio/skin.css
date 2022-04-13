@@ -1,0 +1,193 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+:root {
+  /* todo: fix in DNA */
+  --radio-emphasized-circle-border-color-selected-key-focus: var(
+    --radio-emphasized-circle-border-color-selected-hover
+  );
+}
+
+.Radio .Radio-input {
+  &:checked + .Radio-button {
+    &:before {
+      border-color: var(--radio-emphasized-circle-border-color-selected);
+    }
+  }
+}
+
+.Radio-label {
+  color: var(--radio-emphasized-text-color);
+}
+
+.Radio-button {
+  &:before {
+    background-color: var(--radio-emphasized-circle-background-color);
+    border-color: var(--radio-emphasized-circle-border-color);
+  }
+}
+
+.Radio {
+  &:hover {
+    .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-hover);
+        box-shadow: none;
+      }
+    }
+
+    .Radio-input:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-selected-hover);
+      }
+    }
+
+    .Radio-label {
+      color: var(--radio-emphasized-text-color-hover);
+    }
+  }
+
+  &:active {
+    .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-down);
+      }
+    }
+
+    .Radio-input:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-selected-down);
+      }
+    }
+
+    .Radio-label {
+      color: var(--radio-emphasized-text-color-down);
+    }
+  }
+  & .Radio-input:focus-ring,
+  &:hover .Radio-input:focus-ring {
+    &:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-selected-key-focus);
+      }
+    }
+  }
+}
+
+.Radio--quiet {
+  .Radio-input:checked + .Radio-button {
+    &:before {
+      border-color: var(--radio-quiet-circle-border-color-selected);
+    }
+  }
+  &:hover {
+    .Radio-input:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-quiet-circle-border-color-selected-hover);
+      }
+    }
+  }
+  &:active {
+    .Radio-input:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-quiet-circle-border-color-selected-down);
+      }
+    }
+  }
+  & .Radio-input:focus-ring,
+  &:hover .Radio-input:focus-ring {
+    &:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-quiet-circle-border-color-selected-key-focus);
+      }
+    }
+  }
+}
+
+.Radio,
+.Radio--quiet {
+  &.is-invalid {
+    .Radio-button,
+    .Radio-input:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-error);
+      }
+    }
+    .Radio-label {
+      color: var(--radio-emphasized-circle-border-color-error);
+    }
+  }
+  &.is-invalid:hover {
+    .Radio-input + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-error-hover);
+      }
+    }
+    .Radio-label {
+      color: var(--radio-emphasized-circle-border-color-error-hover);
+    }
+  }
+  &.is-invalid:active {
+    .Radio-input + .Radio-button {
+      &:before {
+        border-color: var(--radio-emphasized-circle-border-color-error-down);
+      }
+    }
+    .Radio-label {
+      color: var(--radio-emphasized-circle-border-color-error-down);
+    }
+  }
+  &.is-invalid .Radio-input:focus-ring,
+  &.is-invalid:hover .Radio-input:focus-ring {
+    &:not(:checked) + .Radio-button {
+      &:before {
+        border-color: var(--radio-circle-border-color-error-key-focus);
+      }
+    }
+    &:checked + .Radio-button {
+      &:before {
+        border-color: var(--radio-circle-border-color-error-selected-key-focus);
+      }
+    }
+  }
+}
+
+.Radio-input {
+  &:disabled + .Radio-button {
+    &:before {
+      border-color: var(--radio-emphasized-circle-border-color-disabled) !important;
+    }
+  }
+
+  &:disabled ~ .Radio-label {
+    color: var(--radio-emphasized-text-color-disabled) !important;
+  }
+}
+
+/* Focus Overrides all */
+/* Removed :before so that border-color isn't overwritten by keyboard focus */
+.Radio,
+.Radio--quiet {
+  & .Radio-input:focus-ring,
+  &:hover .Radio-input:focus-ring {
+    &:not(:checked) + .Radio-button {
+      &:before {
+        border-color: var(--radio-circle-border-color-key-focus);
+      }
+    }
+    & + .Radio-button {
+      &:after {
+        box-shadow: 0 0 0 var(--radio-focus-ring-size-key-focus)
+          var(--radio-focus-ring-color-key-focus);
+      }
+    }
+  }
+}

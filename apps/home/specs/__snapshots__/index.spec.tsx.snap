@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card should render successfully 1`] = `
+<div>
+  <div
+    class="page-container"
+  >
+    <div
+      data-sb-object-id="content/pages/index.md"
+    />
+    <div
+      class="page-footer"
+    >
+      <div
+        class="footer-container"
+        data-sb-field-path="content/data/config.json:footer"
+      >
+        <div
+          class="footer-content"
+          data-sb-field-path=".copyright"
+        >
+          <p>
+            Made by 
+            <a
+              href="https://www.stackbit.com/"
+            >
+              Stackbit
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

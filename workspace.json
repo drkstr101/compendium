@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "libs/api",
+    "content-readme": "libs/content/readme",
+    "dev-docs-css-module-preview": "libs/dev/docs/css-module-preview",
+    "env-spectrum": "libs/env/spectrum",
+    "home": "apps/home",
+    "home-e2e": "apps/home-e2e",
+    "theme-dark-theme": "libs/theme/dark-theme",
+    "theme-default-theme": "libs/theme/default-theme",
+    "theme-light-theme": "libs/theme/light-theme",
+    "theme-provider": "libs/theme/provider",
+    "theme-styles": "libs/theme/styles",
+    "ui": "libs/ui"
+  }
+}

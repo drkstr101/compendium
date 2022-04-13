@@ -1,0 +1,126 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+@import 'animation.css';
+
+.CircleLoader {
+  display: inline-block;
+  width: var(--loader-circle-medium-width);
+  height: var(--loader-circle-medium-height);
+  position: relative;
+  direction: ltr;
+}
+.CircleLoader-track {
+  box-sizing: border-box;
+  width: calc(var(--loader-circle-medium-width));
+  height: calc(var(--loader-circle-medium-height));
+  border-style: solid;
+  border-width: var(--loader-circle-medium-border-size);
+  border-radius: var(--loader-circle-medium-width);
+}
+.CircleLoader-fills {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.CircleLoader-fill {
+  box-sizing: border-box;
+  width: calc(var(--loader-circle-medium-width));
+  height: calc(var(--loader-circle-medium-height));
+  border-style: solid;
+  border-width: var(--loader-circle-medium-border-size);
+  border-radius: var(--loader-circle-medium-width);
+}
+.CircleLoader-fillMask1,
+.CircleLoader-fillMask2 {
+  width: 50%;
+  height: 100%;
+  transform-origin: 100% center;
+  transform: rotate(180deg);
+  overflow: hidden;
+  position: absolute;
+}
+.CircleLoader-fillSubMask1,
+.CircleLoader-fillSubMask2 {
+  width: 100%;
+  height: 100%;
+  transform-origin: 100% center;
+  overflow: hidden;
+  transform: rotate(-180deg);
+}
+.CircleLoader-fillMask2 {
+  transform: rotate(0deg);
+}
+
+.CircleLoader--small {
+  width: var(--loader-circle-small-width);
+  height: var(--loader-circle-small-height);
+
+  .CircleLoader-track {
+    width: calc(var(--loader-circle-small-width));
+    height: calc(var(--loader-circle-small-height));
+    border-style: solid;
+    border-width: var(--loader-circle-small-border-size);
+    border-radius: var(--loader-circle-small-width);
+  }
+  .CircleLoader-fill {
+    width: calc(var(--loader-circle-small-width));
+    height: calc(var(--loader-circle-small-height));
+    border-style: solid;
+    border-width: var(--loader-circle-small-border-size);
+    border-radius: var(--loader-circle-small-width);
+  }
+}
+
+.CircleLoader--large {
+  width: var(--loader-circle-large-width);
+  height: var(--loader-circle-large-height);
+
+  .CircleLoader-track {
+    width: calc(var(--loader-circle-large-width));
+    height: calc(var(--loader-circle-large-height));
+    border-style: solid;
+    border-width: var(--loader-circle-large-border-size);
+    border-radius: var(--loader-circle-large-width);
+  }
+
+  .CircleLoader-fill {
+    width: calc(var(--loader-circle-large-width));
+    height: calc(var(--loader-circle-large-height));
+    border-style: solid;
+    border-width: var(--loader-circle-large-border-size);
+    border-radius: var(--loader-circle-large-width);
+  }
+}
+
+.CircleLoader--indeterminate {
+  .CircleLoader-fills {
+    will-change: transform;
+    transform: translateZ(0);
+    animation: fills-rotate 1s infinite cubic-bezier(0.25, 0.78, 0.48, 0.89);
+    transform-origin: center;
+  }
+  .CircleLoader-fillSubMask1 {
+    will-change: transform;
+    transform: translateZ(0);
+    animation: fill-mask-1 1s infinite linear;
+  }
+
+  .CircleLoader-fillSubMask2 {
+    will-change: transform;
+    transform: translateZ(0);
+    animation: fill-mask-2 1s infinite linear;
+  }
+}

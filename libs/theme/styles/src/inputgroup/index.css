@@ -1,0 +1,222 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  /* Todo: move to DNA */
+  --combobox-quiet-fieldbutton-border-radius: 0;
+  --combobox-quiet-fieldbutton-padding-right: 0;
+  --combobox-quiet-fieldbutton-padding-left: var(--global-dimension-size-130);
+  --combobox-validation-icon-right: var(--global-dimension-size-100);
+  --datepicker-input-width: calc(var(--global-dimension-size-1600) - 2 * var(--padding));
+  --datepicker-datetime-input-width: calc(
+    var(--datepicker-input-width) + var(--global-dimension-size-700) -
+      var(--global-dimension-static-font-size-100) / 2
+  );
+  --datepicker-range-dash-margin-left: calc(
+    -0.5 * var(--global-dimension-static-font-size-100)
+  );
+  --datepicker-range-dash-padding-top: 0;
+  --datepicker-range-dash-line-height: calc(
+    var(--textfield-height) - var(--global-dimension-size-100)
+  );
+
+  --combobox-button-width: var(--global-dimension-size-400);
+}
+
+.InputGroup {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  min-width: calc(2.5 * var(--dropdown-height));
+  border-radius: var(--border-radius);
+
+  .FieldButton {
+    padding: 0;
+    inline-size: var(--combobox-button-width);
+    border-start-start-radius: var(--combobox-fieldbutton-border-top-left-radius);
+    border-end-start-radius: var(--combobox-fieldbutton-border-bottom-left-radius);
+    border-width: 1px;
+    flex-shrink: 0;
+  }
+
+  /* Quiet or invalid inputgroup field button should always have a border width. */
+  &.is-disabled:not(.InputGroup--invalid):not(.InputGroup--quiet) {
+    .FieldButton {
+      border-width: 0;
+    }
+  }
+
+  .InputGroup-field {
+    .InputGroup-input-validationIcon {
+      padding-inline-end: 0;
+      inset-inline-end: var(--combobox-validation-icon-right);
+    }
+
+    .InputGroup-input-circleLoader {
+      padding-inline-end: 0;
+      inset-inline-end: var(--combobox-validation-icon-right);
+    }
+  }
+}
+
+.InputGroup-field {
+  flex: 1 1 auto;
+}
+
+.InputGroup-input {
+  border-start-end-radius: var(--combobox-textfield-border-top-right-radius);
+  border-end-end-radius: var(--combobox-textfield-border-bottom-right-radius);
+  border-inline-end-style: none;
+}
+
+.InputGroup--quiet {
+  border-radius: var(--combobox-quiet-fieldbutton-border-radius);
+  min-width: calc(2 * var(--dropdown-height));
+
+  .FieldButton {
+    inline-size: auto;
+    position: relative;
+
+    padding-inline-start: var(--combobox-quiet-fieldbutton-padding-left);
+    padding-inline-end: var(--combobox-quiet-fieldbutton-padding-right);
+    border-width: 0;
+    border-bottom: var(--textfield-quiet-affixed-border-size) solid;
+    border-radius: var(--combobox-quiet-fieldbutton-border-radius);
+
+    /* More hitarea */
+    &:after {
+      content: '';
+      position: absolute;
+      block-size: 100%;
+      inline-size: 10px;
+      inset-inline-end: -10px;
+    }
+  }
+
+  .InputGroup-icon {
+    inset-inline-end: 0;
+  }
+
+  &.is-disabled {
+    .FieldButton {
+      border-bottom-width: 1px;
+    }
+  }
+
+  .InputGroup-field {
+    .InputGroup-input-validationIcon {
+      padding-inline-end: 0;
+      inset-inline-end: 0;
+    }
+
+    .InputGroup-input-circleLoader {
+      padding-inline-end: 0;
+      inset-inline-end: var(--global-dimension-size-10);
+    }
+  }
+}
+
+.InputGroup-popover--quiet {
+  /* Define this var so it can be read from JS */
+  --dropdown-quiet-offset: calc(
+    var(--dropdown-quiet-popover-offset-x) + var(--popover-border-size)
+  );
+  margin-inline-end: calc(var(--dropdown-quiet-offset) * -1);
+}
+
+.Datepicker--range {
+  border-radius: var(--border-radius);
+  /* Input Group */
+  &.InputGroup--quiet {
+    border-radius: var(--combobox-quiet-fieldbutton-border-radius);
+    .FieldButton {
+      border-radius: var(--combobox-quiet-fieldbutton-border-radius);
+    }
+  }
+  /* Datetime Range */
+  &.Datepicker--datetimeRange {
+    /* Inputs */
+    .InputGroup-field {
+      width: var(--datepicker-datetime-input-width);
+      min-width: var(--datepicker-datetime-input-width);
+    }
+  }
+  /* Inputs */
+  .InputGroup-field {
+    width: var(--datepicker-input-width);
+    min-width: var(--datepicker-input-width);
+    flex: initial;
+  }
+  .Datepicker-startField {
+    .InputGroup-field {
+      border-inline-end: 0;
+      padding-inline-end: var(--padding);
+    }
+
+    svg {
+      display: none;
+    }
+  }
+  .Datepicker-endField {
+    .InputGroup-input {
+      flex: 1;
+      border-inline-start: 0;
+      border-radius: 0;
+      padding-inline-start: var(--padding);
+    }
+  }
+  /* Em dash */
+  .Datepicker--rangeDash {
+    line-height: var(--datepicker-range-dash-line-height);
+    padding-top: var(--datepicker-range-dash-padding-top);
+    flex: initial;
+    width: 0;
+    z-index: 1;
+    &:before {
+      content: '–';
+      display: inline-block;
+      margin: 0 var(--datepicker-range-dash-margin-left);
+      overflow: hidden;
+      text-align: center;
+      vertical-align: middle;
+      width: var(--global-dimension-static-font-size-100);
+    }
+  }
+  /* Focus ring */
+  &.is-focused {
+    .Datepicker-focusRing {
+      position: absolute;
+      border-radius: var(--border-radius);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  }
+  &.InputGroup--quiet {
+    &.is-focused {
+      .Datepicker-focusRing {
+        border-radius: var(--combobox-quiet-fieldbutton-border-radius);
+        top: auto;
+      }
+    }
+    .Datepicker--rangeDash {
+      &:before {
+        margin-inline-start: var(--datepicker-range-dash-margin-left);
+      }
+    }
+  }
+}

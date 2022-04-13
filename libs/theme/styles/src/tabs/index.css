@@ -1,0 +1,295 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --tabs-item-height: calc(var(--tabs-height) - var(--tabs-rule-height));
+  --tabs-compact-item-height: calc(var(--tabs-quiet-compact-height) - var(--tabs-rule-height));
+}
+
+.TabsPanel {
+  display: flex;
+  /* This is so TabsPanel can collapse with wrapping block/flex containers out of the box. If end user wants to place element next to tabpanel,
+  they must include flex: 1 1 auto and min-width: 0 on the Tabs component. */
+  width: 100%;
+}
+
+.TabsPanel--horizontal {
+  flex-direction: column;
+}
+
+.TabsPanel--vertical {
+  flex-direction: row;
+}
+
+.Tabs {
+  display: flex;
+
+  /* Contain the selection indicator */
+  position: relative;
+  z-index: 0;
+
+  margin: 0;
+  padding: 0;
+
+  /* Friends should align to the top of the tabs */
+  vertical-align: top;
+
+  outline: none;
+  user-select: none;
+}
+
+.Tabs-item {
+  /* Contain the focus ring */
+  position: relative;
+
+  box-sizing: border-box;
+
+  block-size: var(--tabs-item-height);
+  line-height: var(--tabs-item-height);
+
+  /* Float above the tab line */
+  z-index: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition: color var(--global-animation-duration-100) ease-out;
+  cursor: default;
+  outline: none;
+
+  &.is-disabled {
+    cursor: default;
+
+    .Tabs-itemLabel {
+      cursor: default;
+    }
+  }
+
+  .Icon {
+    /* Vertical centering */
+    block-size: var(--tabs-item-height);
+    transition: fill var(--global-animation-duration-100) ease-out;
+    /* Prevents a wiggle in Safari when switching tabs. */
+    transform: translate3d(0, 0, 0);
+
+    & + .Tabs-itemLabel {
+      margin-inline-start: var(--tabs-icon-gap);
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+
+    box-sizing: border-box;
+
+    block-size: var(--tabs-focus-ring-height);
+    margin-block-start: calc(
+      calc(var(--tabs-focus-ring-height) / -2) + calc(var(--tabs-rule-height) / 2)
+    );
+    inset-inline-start: calc(var(--tabs-focus-ring-padding-x) * -1);
+    inset-inline-end: calc(var(--tabs-focus-ring-padding-x) * -1);
+    border: var(--tabs-focus-ring-size) solid transparent;
+    border-radius: var(--tabs-focus-ring-border-radius);
+
+    pointer-events: none;
+  }
+}
+
+.Tabs-itemLabel {
+  cursor: default;
+  vertical-align: top;
+  display: inline-block;
+
+  font-size: var(--tabs-text-size);
+  font-weight: var(--tabs-text-font-weight);
+
+  &:empty {
+    /* Hide the tab label if it's not being used */
+    display: none;
+  }
+}
+
+.Tabs-selectionIndicator {
+  position: absolute;
+  inset-inline-start: 0;
+
+  /* Be below the tab */
+  z-index: 0;
+  transform-origin: top left;
+
+  [dir='ltr'] .Tabs--horizontal & {
+    transform: translateX(var(--tabs-focus-ring-padding-x));
+  }
+
+  [dir='rtl'] .Tabs--horizontal & {
+    transform: translateX(calc(var(--tabs-focus-ring-padding-x) * -1));
+  }
+
+  border-radius: var(--tabs-rule-border-radius);
+}
+
+.Tabs--compact {
+  .Tabs-item {
+    block-size: var(--tabs-compact-item-height);
+    line-height: var(--tabs-compact-item-height);
+
+    .Icon {
+      /* Vertical centering */
+      block-size: var(--tabs-compact-item-height);
+    }
+  }
+}
+
+.Tabs--horizontal {
+  align-items: center;
+
+  border-block-end: var(--tabs-rule-height) solid;
+
+  .Tabs-item {
+    vertical-align: top;
+
+    /* Target anything since React likes to add lots of happy <div>s around all things */
+    & + *:not(.Tabs-selectionIndicator) {
+      margin-inline-start: var(--tabs-item-gap);
+    }
+  }
+
+  .Tabs-selectionIndicator {
+    position: absolute;
+    block-size: var(--tabs-rule-height);
+
+    inset-block-end: calc(var(--tabs-rule-height) * -1);
+    transition: transform var(--tabs-selection-indicator-animation-duration) ease-in-out,
+      width var(--tabs-selection-indicator-animation-duration) ease-in-out;
+  }
+
+  &.Tabs--isCollapsed {
+    inset-inline-start: 0;
+    block-size: var(--tabs-item-height);
+
+    /* FieldButton Picker focus ring override */
+    & button {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+
+        box-sizing: border-box;
+
+        block-size: var(--tabs-focus-ring-height);
+        margin-block-start: calc(
+          calc(var(--tabs-focus-ring-height) / -2) + calc(var(--tabs-rule-height) / 2)
+        );
+        inset-inline-start: calc(var(--tabs-focus-ring-padding-x) * -1);
+        inset-inline-end: calc(var(--tabs-focus-ring-padding-x) * -1);
+        border: var(--tabs-focus-ring-size) solid transparent;
+        border-radius: var(--tabs-focus-ring-border-radius);
+
+        pointer-events: none;
+      }
+    }
+
+    &.Tabs--compact {
+      & button {
+        height: calc(var(--tabs-compact-item-height));
+      }
+    }
+  }
+
+  &.Tabs--compact {
+    /* The ActionButton is taller than the tabs, so don't push tabs around */
+    box-sizing: content-box;
+    block-size: var(--tabs-compact-item-height);
+    align-items: end;
+  }
+}
+
+/* Quiet tabs should not extend all the way across the screen as their line doesn't */
+.Tabs--quiet {
+  display: inline-flex;
+}
+
+.Tabs--vertical {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0;
+  border-inline-start: var(--tabs-vertical-rule-width) solid;
+
+  .Tabs-item {
+    block-size: var(--tabs-vertical-item-height);
+    padding: 0 var(--tabs-focus-ring-padding-x);
+    /* Subtract focus ring padding from margin-left since the padding value already offsets tabs-items */
+    margin-inline-start: calc(
+      var(--tabs-vertical-item-margin-left) - var(--tabs-focus-ring-padding-x)
+    );
+    margin-block-end: var(--tabs-vertical-item-gap);
+
+    &::before {
+      /* padding is included in click area of tab items, so only need to offset by the size of the focus ring's border */
+      inset-inline-start: calc(var(--tabs-focus-ring-size) * -1);
+      inset-inline-end: calc(var(--tabs-focus-ring-size) * -1);
+      margin-block-start: calc(calc(var(--tabs-focus-ring-height) / -2));
+    }
+  }
+
+  &.Tabs--compact {
+    .Tabs-item {
+      block-size: var(--tabs-compact-vertical-item-height);
+      line-height: var(--tabs-compact-vertical-item-height);
+      margin-block-end: var(--tabs-compact-vertical-item-gap);
+
+      .Icon {
+        /* Vertical centering */
+        block-size: var(--tabs-compact-vertical-item-height);
+      }
+    }
+  }
+
+  .Tabs-selectionIndicator {
+    position: absolute;
+    inline-size: var(--tabs-vertical-rule-width);
+
+    inset-inline-start: calc(var(--tabs-vertical-rule-width) * -1);
+    transition: transform var(--tabs-selection-indicator-animation-duration) ease-in-out,
+      height var(--tabs-selection-indicator-animation-duration) ease-in-out;
+  }
+}
+
+.TabsPanel-collapseWrapper {
+  display: flex;
+  position: relative;
+}
+
+.TabsPanel-tabs {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0%;
+
+  &.Tabs--vertical {
+    flex-grow: 0;
+  }
+}
+
+.TabsPanel-tabpanel {
+  flex-grow: 1;
+  border: var(--tabs-focus-ring-size) solid transparent;
+}
+
+.TabsPanel--vertical {
+  .Tabs {
+    padding-right: var(--global-dimension-size-160);
+  }
+}

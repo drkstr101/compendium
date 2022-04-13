@@ -1,0 +1,633 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --slider-controls-margin: calc(var(--slider-handle-width) / 2);
+  --slider-track-margin-offset: calc(var(--slider-controls-margin) * -1);
+
+  --slider-handle-margin-top: calc(var(--slider-handle-width) / -2);
+  --slider-handle-margin-left: calc(var(--slider-handle-width) / -2);
+
+  --dial-width: var(--slider-height);
+  --dial-label-gap-y: var(--global-dimension-size-65);
+  --dial-handle-position: var(--global-dimension-size-100);
+
+  --slider-track-handleoffset: calc(var(--slider-handle-gap));
+  --slider-track-middle-handleoffset: calc(
+    var(--slider-handle-gap) + calc(var(--slider-handle-width) / 2)
+  );
+
+  --slider-input-top: calc(var(--slider-handle-margin-top) / 4);
+  --slider-input-left: calc(var(--slider-handle-margin-left) / 4);
+
+  --dial-handle-size: 100%;
+  --dial-min-height: 0;
+  --dial-controls-min-height: 0;
+  --dial-controls-margin: 0;
+
+  --slider-color-min-height: auto;
+  --slider-color-track-padding: 0;
+  --slider-color-track-top: 0;
+  --slider-color-track-margin-top: 0;
+  --slider-color-track-margin-left: 0;
+  --slider-color-track-margin-right: 0;
+  --slider-color-handle-top: 50%;
+
+  --slider-ramp-margin-top: 0;
+
+  --slider-range-track-reset: 0;
+}
+
+.Slider {
+  position: relative;
+
+  /* Don't let z-index'd child elements float above other things on the page */
+  z-index: 1;
+  display: block;
+
+  user-select: none;
+  touch-action: none;
+
+  width: var(--global-dimension-size-2400);
+  min-inline-size: var(--slider-min-width);
+  flex-shrink: 0;
+
+  &.Slider--positionTop {
+    display: inline-flex;
+    flex-direction: column;
+    width: var(--component-single-line-width);
+
+    .Slider-controls {
+      /* If the user overrides the width of the field, propagate to the inner component */
+      width: calc(100% - calc(var(--slider-controls-margin)) * 2);
+    }
+  }
+
+  /* The side label variant of Field is inline, and fills as much space as needed
+   * by default. If an explicit width is set, then the field flexes to fill available space. */
+  &.Slider--positionSide {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+
+    .Slider-controls {
+      flex: 1;
+      width: var(--component-single-line-width);
+    }
+
+    .Slider-labelContainer {
+      margin-inline-end: calc(var(--slider-label-gap-x) / 2);
+    }
+
+    .Slider-valueLabelContainer {
+      margin-inline-start: calc(var(--slider-label-gap-x) / 2);
+    }
+
+    .Slider-value {
+      text-align: start;
+    }
+  }
+}
+
+.Slider-controls {
+  display: inline-block;
+  box-sizing: border-box;
+
+  position: relative;
+  z-index: auto;
+
+  min-block-size: var(--slider-height);
+
+  /* These calculations prevent the track from spilling outside of the control */
+  inline-size: calc(100% - calc(var(--slider-controls-margin)));
+  margin-inline-start: var(--slider-controls-margin);
+  min-block-size: var(--slider-height);
+
+  vertical-align: top;
+}
+
+.Slider-track,
+.Slider-buffer,
+.Slider-ramp,
+.Slider-fill {
+  block-size: var(--slider-track-height);
+  box-sizing: border-box;
+
+  position: absolute;
+  z-index: 1;
+  inset-block-start: calc(var(--slider-height) / 2);
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+
+  margin-block-start: calc(var(--slider-fill-track-height) / -2);
+
+  pointer-events: none;
+}
+
+.Slider-track,
+.Slider-buffer,
+.Slider-fill {
+  padding-block: 0;
+  padding-inline: 0 var(--slider-track-handleoffset);
+  margin-inline-start: var(--slider-track-margin-offset);
+
+  &::before {
+    content: '';
+    display: block;
+    block-size: 100%;
+
+    border-radius: var(--slider-track-border-radius);
+  }
+}
+
+.Slider-fill {
+  margin-inline-start: 0;
+  padding-block: 0;
+  padding-inline: calc(var(--slider-controls-margin) + var(--slider-track-handleoffset)) 0;
+}
+
+.Slider-fill--right {
+  padding-block: 0;
+  padding-inline: 0 calc(var(--slider-controls-margin) + var(--slider-track-handleoffset));
+}
+
+.Slider-buffer {
+  padding-block: 0;
+  padding-inline: 0 var(--slider-track-handleoffset);
+}
+
+.Slider-track ~ .Slider-track,
+.Slider-buffer ~ .Slider-buffer {
+  inset-inline-start: auto;
+  inset-inline-end: var(--slider-range-track-reset);
+  padding-block: 0;
+  padding-inline: var(--slider-track-handleoffset) 0;
+  margin-inline-start: var(--slider-range-track-reset);
+  margin-inline-end: var(--slider-track-margin-offset);
+}
+
+.Slider-buffer ~ .Slider-buffer {
+  margin-inline-end: var(--slider-range-track-reset);
+  padding-block: 0;
+  padding-inline: var(--slider-track-middle-handleoffset) 0;
+
+  &:after {
+    display: none;
+  }
+}
+
+.Slider--range {
+  .Slider-track {
+    &:first-of-type {
+      padding-block: 0;
+      padding-inline: 0 var(--slider-track-handleoffset);
+      inset-inline-start: var(--slider-range-track-reset);
+      inset-inline-end: auto;
+      margin-inline-start: var(--slider-track-margin-offset);
+    }
+
+    /* Force specificity otherwise the ~ rules above override */
+    &:dir(ltr),
+    &:dir(rtl) {
+      padding-block: 0;
+      padding-inline: var(--slider-track-middle-handleoffset)
+        var(--slider-track-middle-handleoffset);
+      inset-inline-start: auto;
+      inset-inline-end: auto;
+      margin-inline: var(--slider-range-track-reset);
+      margin-block: var(--slider-range-track-reset);
+    }
+    &:last-of-type {
+      padding-block: 0;
+      padding-inline: var(--slider-track-handleoffset) 0;
+      inset-inline-start: auto;
+      inset-inline-end: var(--slider-range-track-reset);
+      margin-inline-end: var(--slider-track-margin-offset);
+    }
+  }
+}
+
+.Slider-buffer {
+  /* Appear above track */
+  z-index: 2;
+}
+
+.Slider-ramp {
+  margin-block-start: var(--slider-ramp-margin-top);
+  block-size: var(--slider-ramp-track-height);
+
+  position: absolute;
+  inset-inline-start: var(--slider-track-margin-offset);
+  inset-inline-end: var(--slider-track-margin-offset);
+  inset-block-start: calc(var(--slider-ramp-track-height) / 2);
+
+  svg {
+    inline-size: 100%;
+    block-size: 100%;
+
+    /* Flip the ramp automatically for RTL */
+    transform: logical rotate(0deg);
+  }
+}
+
+.Slider-handle {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(var(--slider-height) / 2);
+  z-index: 2;
+
+  display: inline-block;
+  box-sizing: border-box;
+
+  inline-size: var(--slider-handle-width);
+  block-size: var(--slider-handle-height);
+
+  margin-block: var(--slider-handle-margin-top) 0;
+  margin-inline: calc(var(--slider-handle-width) / -2) 0;
+
+  border-width: var(--slider-handle-border-size);
+  border-style: solid;
+
+  border-radius: var(--slider-handle-border-radius);
+
+  transition: border-width var(--slider-animation-duration) ease-in-out;
+
+  outline: none;
+  /* cursor: pointer; */
+  /* cursor: grab; */
+
+  &:active,
+  &.is-dragged {
+    border-width: var(--slider-handle-border-size-down);
+    /* cursor: ns-resize; */
+    /* cursor: grabbing; */
+  }
+
+  &:active,
+  $.is-dragged {
+  }
+
+  &:active,
+  &.is-focused,
+  &.is-dragged,
+  &.is-tophandle {
+    z-index: 3;
+  }
+
+  &:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transition: box-shadow var(--global-animation-duration-100) ease-out,
+      width var(--global-animation-duration-100) ease-out,
+      height var(--global-animation-duration-100) ease-out;
+
+    width: var(--slider-handle-width);
+    height: var(--slider-handle-height);
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 100%;
+  }
+
+  &.is-focused {
+    &:before {
+      width: calc(var(--slider-handle-width) + var(--alias-focus-ring-gap) * 2);
+      height: calc(var(--slider-handle-height) + var(--alias-focus-ring-gap) * 2);
+    }
+  }
+}
+
+.Slider-input {
+  /*  Remove the margin for input in Firefox and Safari. */
+  margin: 0;
+
+  inline-size: var(--slider-handle-width);
+  block-size: var(--slider-handle-height);
+  padding: 0;
+  position: absolute;
+  inset-block-start: var(--slider-input-top);
+  inset-inline-start: var(--slider-input-left);
+  overflow: hidden;
+  opacity: 0.000001;
+  cursor: default;
+  -webkit-appearance: none;
+  border: 0;
+  pointer-events: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.Slider-labelContainer,
+.Slider-valueLabelContainer {
+  display: flex;
+  position: relative;
+
+  inline-size: auto;
+
+  font-size: var(--text-size-text-label);
+  line-height: var(--line-height-text-label);
+}
+
+.Slider-label,
+.Dial-label {
+  padding-inline-start: 0;
+  flex-grow: 1;
+}
+
+.Slider-value,
+.Dial-value {
+  flex-grow: 0;
+  padding-inline-end: 0;
+  cursor: default;
+  font-feature-settings: 'tnum';
+  text-align: end;
+}
+
+.Slider-value {
+  margin-inline-start: calc(var(--slider-label-gap-x) / 2);
+  white-space: nowrap;
+}
+
+.Slider-ticks {
+  display: flex;
+  justify-content: space-between;
+
+  z-index: 0;
+
+  margin: 0 var(--slider-track-margin-offset);
+  margin-block-start: calc(
+    var(--slider-tick-mark-height) + calc(var(--slider-track-height) / 2)
+  );
+}
+
+.Slider-tick {
+  position: relative;
+
+  inline-size: var(--slider-tick-mark-width);
+
+  &:after {
+    display: block;
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: calc(50% - calc(var(--slider-tick-mark-width) / 2));
+    content: '';
+    inline-size: var(--slider-tick-mark-width);
+    block-size: var(--slider-tick-mark-height);
+
+    border-radius: var(--slider-tick-mark-border-radius);
+  }
+
+  .Slider-tickLabel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-block: var(--slider-label-gap-x) 0;
+    margin-inline: calc(var(--slider-label-gap-x) * -1) calc(var(--slider-label-gap-x) * -1);
+
+    font-size: var(--text-size-text-label);
+    line-height: var(--line-height-text-label);
+  }
+
+  &:first-of-type,
+  &:last-of-type {
+    .Slider-tickLabel {
+      display: block;
+      position: absolute;
+      margin-block: var(--slider-label-gap-x) 0;
+      margin-inline: 0;
+    }
+  }
+
+  &:first-of-type {
+    .Slider-tickLabel {
+      inset-inline-start: 0;
+    }
+  }
+
+  &:last-of-type {
+    .Slider-tickLabel {
+      inset-inline-end: 0;
+    }
+  }
+}
+
+.Slider--color {
+  .Slider-labelContainer {
+    padding-block-end: var(--fieldlabel-padding-bottom);
+  }
+  .Slider-controls,
+  .Slider-controls::before,
+  .Slider-track {
+    min-block-size: var(--slider-color-min-height);
+    block-size: var(--slider-color-track-height);
+    margin-inline-start: var(--slider-color-track-margin-left);
+    inline-size: 100%;
+  }
+  .Slider-controls::before {
+    display: block;
+    content: '';
+  }
+  .Slider-controls::before,
+  .Slider-track {
+    inset-block-start: var(--slider-color-track-top);
+    padding: var(--slider-color-track-padding);
+    margin-block-start: var(--slider-color-track-margin-top);
+    margin-inline-end: var(--slider-color-track-margin-right);
+    border-radius: var(--alias-border-radius-regular);
+  }
+  .Slider-handle {
+    inset-block-start: var(--slider-color-handle-top);
+  }
+}
+
+.Dial {
+  @inherit: .Slider;
+  display: inline-flex;
+  flex-direction: column;
+
+  block-size: auto;
+  min-inline-size: var(--dial-min-height);
+  min-block-size: var(--dial-min-height);
+  inline-size: var(--dial-container-width);
+}
+
+.Dial-labelContainer {
+  @inherit: .Slider-labelContainer;
+  margin-block-end: var(--dial-label-gap-y);
+}
+
+.Dial-label {
+  &:only-child {
+    /* Only center if we don't have a value */
+    text-align: center;
+  }
+}
+
+.Dial-controls {
+  @inherit: .Slider-controls;
+  inline-size: var(--dial-width);
+  block-size: var(--dial-width);
+  min-block-size: var(--dial-controls-min-height);
+
+  border-radius: var(--dial-border-radius);
+  position: relative;
+  display: inline-block;
+  margin: var(--dial-controls-margin);
+
+  box-sizing: border-box;
+  outline: none;
+
+  &::before,
+  &::after {
+    content: '';
+    inline-size: calc(var(--slider-tick-mark-width) * 2);
+    block-size: var(--slider-tick-mark-width);
+    border-radius: var(--slider-tick-mark-border-radius);
+    position: absolute;
+    inset-block-end: 0;
+  }
+  &::before {
+    inset-inline-start: auto;
+    inset-inline-end: calc(var(--slider-tick-mark-width) * -1);
+    transform: rotate(var(--dial-min-max-tick-angles));
+  }
+  &::after {
+    inset-inline-start: calc(var(--slider-tick-mark-width) * -1);
+    transform: rotate(calc(-1 * var(--dial-min-max-tick-angles)));
+  }
+}
+
+.Dial-handle {
+  @inherit: .Slider-handle;
+  inline-size: var(--dial-handle-size);
+  block-size: var(--dial-handle-size);
+  border-width: var(--slider-handle-border-size);
+  box-shadow: none;
+  position: absolute;
+  inset-block-start: var(--dial-handle-position);
+  inset-inline-start: var(--dial-handle-position);
+  inset-inline-end: var(--dial-handle-position);
+  inset-block-end: var(--dial-handle-position);
+  border-radius: var(--dial-border-radius);
+  transform: rotate(calc(-1 * var(--dial-min-max-tick-angles)));
+  cursor: pointer;
+  cursor: grab;
+
+  transition: background-color var(--slider-animation-duration) ease-in-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: calc(var(--slider-tick-mark-width) * -1);
+    inline-size: var(--dial-handle-marker-width);
+    block-size: var(--dial-handle-marker-height);
+    border-radius: var(--dial-handle-marker-border-radius);
+    transform: translateY(-50%);
+    transition: background-color var(--slider-animation-duration) ease-in-out;
+  }
+
+  &:active,
+  &.is-focused,
+  &.is-dragged {
+    border-width: var(--slider-handle-border-size);
+    cursor: ns-resize;
+    cursor: grabbing;
+  }
+}
+
+.Dial-input {
+  @inherit: .Slider-input;
+  inline-size: var(--dial-handle-size);
+  block-size: var(--dial-handle-size);
+  inset-inline-start: 0;
+  inset-block-start: 0;
+}
+
+.Dial--small {
+  .Dial-controls {
+    inline-size: var(--dial-small-width);
+    block-size: var(--dial-small-height);
+  }
+}
+
+.Slider,
+.Dial {
+  &.is-disabled {
+    cursor: default;
+
+    .Slider-handle {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &.Slider--color {
+      .Slider-handle {
+        &:hover,
+        &:active {
+          border-width: var(--slider-color-handle-outset-border-size);
+        }
+      }
+    }
+  }
+}
+
+.u-isGrabbing {
+  cursor: ns-resize;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .Dial {
+    .Dial-label,
+    .Dial-value {
+      cursor: inherit;
+    }
+  }
+
+  .Slider {
+    .Slider-label,
+    .Slider-value {
+      cursor: inherit;
+    }
+  }
+}
+
+.Slider-controls {
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    inline-size: var(--slider-controls-margin);
+    position: absolute;
+    block-size: 100%;
+  }
+  &::before {
+    inset-inline-start: calc(var(--slider-controls-margin) * -1);
+  }
+  &::after {
+    inset-inline-end: calc(var(--slider-controls-margin) * -1);
+  }
+}

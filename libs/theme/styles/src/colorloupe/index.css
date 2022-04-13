@@ -1,0 +1,39 @@
+:root {
+  /* size is the same on desktop and mobile */
+  --colorloupe-width-adjusted: calc(
+    var(--colorloupe-width) + var(--colorhandle-inner-border-size) * 2
+  );
+  --colorloupe-height-adjusted: calc(
+    var(--colorloupe-height) + var(--colorhandle-inner-border-size) * 2
+  );
+
+  /* Distance between the loupe and the handle */
+  --colorloupe-offset: var(--global-dimension-static-size-200);
+
+  /* How much to animate up to the offset distance */
+  --colorloupe-animation-distance: var(--global-dimension-static-size-100);
+}
+
+.ColorLoupe {
+  width: var(--colorloupe-width-adjusted);
+  height: var(--colorloupe-height-adjusted);
+
+  position: absolute;
+  transform: translate(0, var(--colorloupe-animation-distance));
+  opacity: 0;
+  transform-origin: bottom center;
+  bottom: calc(50% + var(--colorloupe-offset));
+  left: calc(50% - calc(var(--colorloupe-width-adjusted) / 2));
+  transition: transform 100ms ease-in-out, opacity 125ms ease-in-out;
+
+  pointer-events: none;
+
+  &.is-open {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+.ColorLoupe-outer {
+  stroke-width: var(--colorloupe-outer-border-size);
+}

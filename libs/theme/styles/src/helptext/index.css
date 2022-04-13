@@ -1,0 +1,52 @@
+/*
+ * Copyright 2021 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --helptext-neutral-texticon-text-size: var(--global-dimension-font-size-75);
+  --helptext-neutral-texticon-icon-gap: var(--global-dimension-size-100);
+
+  --helptext-negative-texticon-icon-padding-top: var(--global-dimension-size-40);
+  --helptext-negative-texticon-icon-padding-bottom: var(--global-dimension-size-40);
+
+  --helptext-neutral-textonly-text-padding-top: var(--global-dimension-static-size-50);
+  --helptext-neutral-textonly-text-transform: none;
+  --helptext-neutral-textonly-text-letter-spacing: var(--global-font-letter-spacing-none);
+
+  /* Uses value for DNA variable --helptext-l-neutral-textonly-text-padding-bottom, since m variant doesn't exist */
+  --helptext-neutral-textonly-text-padding-bottom: var(--global-dimension-size-115);
+  /* Override: DNA uses --alias-component-text-line-height */
+  --helptext-neutral-textonly-text-line-height: var(--global-font-line-height-small);
+}
+
+.HelpText {
+  display: flex;
+  font-size: var(--helptext-neutral-texticon-text-size);
+  .HelpText-validationIcon {
+    margin-inline-end: var(--helptext-neutral-texticon-icon-gap);
+    padding-block: var(--helptext-negative-texticon-icon-padding-top)
+      var(--helptext-negative-texticon-icon-padding-bottom);
+    flex-shrink: 0;
+  }
+  .HelpText-text {
+    /* Not in DNA: make text fill up all horizontal space. */
+    flex: 1;
+
+    margin-inline-end: var(--helptext-neutral-texticon-icon-gap);
+    padding-block: var(--helptext-neutral-textonly-text-padding-top)
+      var(--helptext-neutral-textonly-text-padding-bottom);
+    line-height: var(--helptext-neutral-textonly-text-line-height);
+    text-transform: var(--helptext-neutral-textonly-text-transform);
+    letter-spacing: var(--helptext-neutral-textonly-text-letter-spacing);
+  }
+}

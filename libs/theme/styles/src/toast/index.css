@@ -1,0 +1,88 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+:root {
+  --toast-icon-padding-y: var(--global-dimension-size-85);
+  --toast-content-padding-top: var(--global-dimension-size-65);
+  --toast-content-padding-bottom: var(--global-dimension-size-65);
+
+  --toast-button-margin-right: var(--global-dimension-size-130);
+}
+
+.Toast {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  border-radius: var(--toast-border-radius);
+
+  padding-block-start: var(--toast-padding-y);
+  padding-inline-end: var(--toast-padding-right);
+  padding-block-end: var(--toast-padding-y);
+  padding-inline-start: var(--toast-padding-left);
+
+  font-size: var(--toast-text-size);
+  font-weight: var(--toast-text-font-weight);
+  -webkit-font-smoothing: antialiased;
+}
+
+.Toast-typeIcon {
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  margin-block-start: var(--toast-icon-padding-y);
+  margin-inline-end: var(--toast-icon-padding-right);
+  margin-block-end: var(--toast-icon-padding-y);
+  margin-inline-start: 0;
+}
+
+.Toast-content {
+  flex: 1 1 auto;
+  display: inline-block;
+  box-sizing: border-box;
+  padding-block-start: var(--toast-content-padding-top);
+  padding-inline-end: var(--toast-content-padding-right);
+  padding-block-end: var(--toast-content-padding-bottom);
+  padding-inline-start: 0;
+  text-align: start;
+}
+
+.Toast-buttons {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+
+  .Button,
+  .ClearButton {
+    & + .Button,
+    & + .ClearButton {
+      margin-inline-start: var(--toast-button-gap);
+    }
+  }
+}
+
+.Toast-body {
+  flex: 1 1 auto;
+  align-self: center;
+
+  .Button {
+    margin-inline-end: var(--toast-button-margin-right);
+  }
+
+  & + .Toast-buttons {
+    padding-inline-start: var(--toast-padding-right);
+
+    border-inline-start-width: 1px;
+    border-inline-start-style: solid;
+  }
+}

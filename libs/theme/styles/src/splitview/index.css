@@ -1,0 +1,164 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --splitview-vertical-width: 100%;
+  --splitview-vertical-gripper-width: 50%;
+  --splitview-vertical-gripper-outer-width: 100%;
+  --splitview-vertical-gripper-reset: 0;
+}
+
+.SplitView {
+  display: flex;
+  overflow: hidden;
+}
+
+.SplitView-pane {
+  height: 100%;
+}
+
+.SplitView-gripper {
+  content: '';
+  display: block;
+  position: absolute;
+  border-style: solid;
+  border-radius: var(--rail-gripper-border-radius);
+
+  top: 50%;
+  transform: translate(0, -50%);
+
+  /* half of (width + horizontal border - handle width) * -1 (for negative opposite) */
+  left: calc(
+    (
+        (
+            var(--rail-gripper-width) + (2 * var(--rail-gripper-border-width-horizontal)) -
+              var(--rail-handle-width)
+          ) / 2
+      ) * -1
+  );
+  width: var(--rail-gripper-width);
+  height: var(--rail-gripper-height);
+  border-width: var(--rail-gripper-border-width-vertical)
+    var(--rail-gripper-border-width-horizontal);
+
+  touch-action: none;
+}
+
+.SplitView-splitter {
+  /* Contain the gripper */
+  position: relative;
+
+  /* Prevent text selection while dragging */
+  user-select: none;
+
+  touch-action: none;
+
+  width: var(--rail-handle-width);
+  height: 100%;
+  z-index: 1;
+
+  &.is-collapsed-start,
+  &.is-collapsed-end {
+    .SplitView-gripper {
+      /* make the center line of the gripper */
+      &:before {
+        content: '';
+        position: absolute;
+
+        top: 0;
+        left: calc(50% - calc(var(--rail-handle-width) / 2));
+        width: var(--rail-handle-width);
+        height: 100%;
+      }
+    }
+  }
+
+  &.is-collapsed-start {
+    .SplitView-gripper {
+      left: 0;
+    }
+  }
+
+  &.is-collapsed-end {
+    .SplitView-gripper {
+      right: 0;
+      left: auto;
+    }
+  }
+}
+
+.SplitView--vertical {
+  flex-direction: column;
+
+  .SplitView-pane {
+    height: auto;
+    width: var(--splitview-vertical-width);
+  }
+
+  .SplitView-gripper {
+    /* half of (height + vertical border - handle width) * -1 (for negative opposite) */
+    top: calc(
+      (
+          (
+              var(--rail-gripper-width) + (2 * var(--rail-gripper-border-width-horizontal)) -
+                var(--rail-handle-width)
+            ) / 2
+        ) * -1
+    );
+
+    transform: translate(calc(var(--splitview-vertical-gripper-width) * -1), 0);
+    left: var(--splitview-vertical-gripper-width);
+    width: var(--rail-gripper-height); /* same as default height */
+    height: var(--rail-gripper-width); /* same as default width */
+
+    /* opposite of default border-width */
+    border-width: var(--rail-gripper-border-width-horizontal)
+      var(--rail-gripper-border-width-vertical);
+  }
+
+  .SplitView-splitter {
+    width: var(--splitview-vertical-width);
+    height: var(--rail-handle-width);
+
+    &.is-collapsed-start,
+    &.is-collapsed-end {
+      .SplitView-gripper {
+        left: var(--splitview-vertical-gripper-width);
+
+        /* make the center line of the gripper */
+        &:before {
+          top: calc(
+            var(--splitview-vertical-gripper-width) - calc(var(--rail-handle-width) / 2)
+          );
+          left: var(--splitview-vertical-gripper-reset);
+          width: var(--splitview-vertical-gripper-outer-width);
+          height: var(--rail-handle-width);
+        }
+      }
+    }
+
+    &.is-collapsed-start {
+      .SplitView-gripper {
+        top: var(--splitview-vertical-gripper-reset);
+      }
+    }
+
+    &.is-collapsed-end {
+      .SplitView-gripper {
+        top: auto;
+        bottom: var(--splitview-vertical-gripper-reset);
+      }
+    }
+  }
+}

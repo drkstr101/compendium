@@ -1,0 +1,11 @@
+.ColorLoupe-outer {
+  fill: var(--colorloupe-inner-border-color);
+  stroke: var(--colorloupe-outer-border-color);
+}
+
+.ColorLoupe-inner-background {
+  fill: var(--global-color-static-white);
+}
+.ColorLoupe-inner-checker {
+  fill: var(--global-color-static-gray-500);
+}

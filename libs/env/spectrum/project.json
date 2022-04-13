@@ -1,0 +1,32 @@
+{
+  "root": "libs/env/spectrum",
+  "sourceRoot": "libs/env/spectrum/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/env/spectrum",
+        "main": "libs/env/spectrum/src/index.ts",
+        "tsConfig": "libs/env/spectrum/tsconfig.lib.json",
+        "assets": ["libs/env/spectrum/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/env/spectrum/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/env/spectrum"],
+      "options": {
+        "jestConfig": "libs/env/spectrum/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

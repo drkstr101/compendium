@@ -1,0 +1,55 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied.  See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --statuslight-padding-y: var(--global-dimension-size-65);
+
+  /* Override line-height to fix Firefox */
+  --statuslight-text-line-height: 1.44;
+
+  /* Override padding to fix alignment of the first line of text (needs to be moved down 1px) */
+  --statuslight-padding-top: calc(var(--statuslight-padding-y) - 1px);
+  --statuslight-padding-bottom: calc(var(--statuslight-padding-y) + 1px);
+}
+
+.StatusLight {
+  min-block-size: var(--statuslight-height);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  padding: var(--statuslight-padding-top) 0 var(--statuslight-padding-bottom) 0;
+  box-sizing: border-box;
+
+  font-size: var(--statuslight-text-size);
+  font-weight: var(--statuslight-text-font-weight);
+  line-height: var(--statuslight-text-line-height);
+
+  &::before {
+    content: '';
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: inline-block;
+    inline-size: var(--statuslight-dot-size);
+    block-size: var(--statuslight-dot-size);
+    border-radius: 50%;
+
+    /* margin on the dog is the opposite of the padding in order to align the dot as if the padding hack was not present */
+    margin: var(--statuslight-padding-bottom) var(--statuslight-text-gap)
+      var(--statuslight-padding-top) var(--statuslight-text-gap);
+  }
+}
+
+.StatusLight--neutral {
+  font-style: italic;
+}

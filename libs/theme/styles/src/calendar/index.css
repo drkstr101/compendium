@@ -1,0 +1,283 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --calendar-border-radius-reset: 0;
+  --calendar-border-width-reset: 0;
+  --calendar-margin-y: 24px;
+  --calendar-margin-x: 32px;
+  --calendar-width: calc((var(--calendar-day-width) + var(--calendar-day-padding) * 2) * 7);
+  --calendar-button-gap: var(--global-dimension-size-40);
+  --calendar-title-margin-x: var(--global-dimension-size-75);
+}
+
+.Calendar {
+  display: block;
+  touch-action: none;
+}
+
+.Calendar--padded {
+  margin: var(--calendar-margin-x) var(--calendar-margin-y);
+}
+
+.Calendar-header {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  width: 100%;
+  gap: var(--global-dimension-size-300);
+}
+
+.Calendar-monthHeader {
+  display: grid;
+  grid-template-areas: 'prev title next';
+  grid-template-columns: minmax(auto, 1fr) auto minmax(auto, 1fr);
+  align-content: start;
+  width: var(--calendar-width);
+  padding: 0 var(--calendar-button-gap);
+  box-sizing: border-box;
+}
+
+.Calendar-title {
+  font-size: var(--calendar-title-text-size);
+  font-weight: bold;
+
+  line-height: var(--calendar-title-height);
+  margin: 0 var(--calendar-title-margin-x);
+  grid-area: title;
+
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Calendar-prevMonth {
+  grid-area: prev;
+  justify-self: start;
+}
+
+.Calendar-nextMonth {
+  grid-area: next;
+  justify-self: end;
+}
+
+.Calendar-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: var(--global-dimension-size-300);
+  align-items: start;
+}
+
+.Calendar-dayOfWeek {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+
+  width: var(--calendar-day-width);
+
+  border-bottom: none !important; /* override abbr styling from normalize.css */
+
+  font-size: var(--calendar-day-title-text-size);
+  font-weight: var(--calendar-day-title-text-font-weight);
+  text-transform: uppercase;
+  text-decoration: none !important; /* override abbr styling from normalize.css */
+
+  cursor: default;
+
+  &[title] {
+    /* Normalize abbr[title] */
+    /* Remove the bottom border in Chrome 57- and Firefox 39-. */
+    border-bottom: none;
+
+    /* Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari. */
+    text-decoration: underline;
+    text-decoration: underline dotted;
+  }
+}
+
+.Calendar-body {
+  outline: none;
+}
+
+.Calendar-table {
+  table-layout: fixed;
+  width: var(--calendar-width);
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.Calendar-tableCell {
+  text-align: center;
+  padding: 0;
+  position: relative;
+  box-sizing: content-box;
+  height: var(--calendar-day-height);
+  width: var(--calendar-day-width);
+  padding: var(--calendar-day-padding);
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.Calendar-date {
+  /* This is fun, but we need to trick the table so it doesn't size itself in a weird way */
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+
+  box-sizing: border-box;
+
+  height: var(--calendar-day-height);
+  width: var(--calendar-day-width);
+  margin: var(--calendar-day-padding);
+
+  border-radius: var(--calendar-day-width);
+
+  font-size: var(--calendar-day-text-size);
+  line-height: var(--calendar-day-height);
+  white-space: nowrap;
+
+  cursor: default;
+
+  transition: background var(--global-animation-duration-100) ease-in-out,
+    color var(--global-animation-duration-100) ease-in-out,
+    border-color var(--global-animation-duration-100) ease-in-out;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:lang(ja),
+  &:lang(zh),
+  &:lang(ko) {
+    font-size: var(--calendar-day-text-size-han);
+  }
+
+  &.is-disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.is-outsideMonth {
+    visibility: hidden;
+  }
+
+  /* focus ring */
+  &:before {
+    border-radius: calc(var(--calendar-day-width) + var(--alias-focus-ring-gap));
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(50% - calc(var(--calendar-day-width) / 2));
+    left: calc(50% - calc(var(--calendar-day-width) / 2));
+    width: calc(var(--calendar-day-width) + var(--alias-focus-ring-gap) * 2);
+    height: calc(var(--calendar-day-height) + var(--alias-focus-ring-gap) * 2);
+    margin: 0;
+    transform: translateX(0); /* Forces FF to render on the pixel grid */
+
+    transition: box-shadow var(--global-animation-duration-100) ease-out,
+      margin var(--global-animation-duration-100) ease-out;
+  }
+
+  &.is-focused {
+    &:before {
+      margin: calc(var(--alias-focus-ring-gap) * -1);
+    }
+  }
+
+  &.is-range-selection {
+    /* overrides to make the cells appear connected */
+    margin: var(--calendar-day-padding) 0;
+    border-width: var(--calendar-border-width-reset);
+    line-height: var(--calendar-day-height);
+    border-radius: var(--calendar-border-radius-reset);
+
+    /* Todo: Calculate this */
+    width: calc(var(--calendar-day-width) + calc(var(--calendar-day-padding) * 2));
+
+    &.is-range-start,
+    &.is-range-end,
+    &.is-selection-start,
+    &.is-selection-end {
+      width: calc(var(--calendar-day-width) + var(--calendar-day-padding));
+    }
+
+    /* hover and selected states */
+    &:after {
+      position: absolute;
+      top: calc(50% - calc(var(--calendar-day-width) / 2));
+      left: calc(50% - calc(var(--calendar-day-width) / 2));
+
+      display: block;
+
+      height: var(--calendar-day-height);
+      width: var(--calendar-day-width);
+
+      border-radius: var(--calendar-day-width);
+
+      content: '';
+      z-index: -1;
+    }
+
+    &.is-range-start,
+    &.is-selection-start {
+      padding-inline-end: var(--calendar-day-padding);
+      margin-inline-start: var(--calendar-day-padding);
+      border-start-start-radius: var(--calendar-day-width);
+      border-end-start-radius: var(--calendar-day-width);
+
+      &:before,
+      &:after {
+        inset-inline-start: 0;
+      }
+    }
+
+    &.is-range-end,
+    &.is-selection-end {
+      padding-inline-start: var(--calendar-day-padding);
+      margin-inline-end: var(--calendar-day-padding);
+      border-start-end-radius: var(--calendar-day-width);
+      border-end-end-radius: var(--calendar-day-width);
+
+      &:before,
+      &:after {
+        inset-inline-start: auto;
+        inset-inline-end: 0;
+      }
+    }
+
+    &.is-selection-start.is-selection-end,
+    &.is-selection-start.is-range-end,
+    &.is-selection-end.is-range-start,
+    &.is-range-start.is-range-end {
+      width: var(--calendar-day-width);
+      border-radius: var(--calendar-day-width);
+    }
+  }
+}
+
+.Calendar-body.is-range-selecting .Calendar-date {
+  transition: none;
+}

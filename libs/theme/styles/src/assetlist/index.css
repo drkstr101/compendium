@@ -1,0 +1,111 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --miller-column-chevron-height: 10px;
+  --miller-column-chevron-width: 6px;
+  --miller-column-checkbox-margin: 0;
+}
+
+.AssetList {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.AssetList-item {
+  position: relative;
+
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+
+  width: var(--miller-column-width);
+  height: var(--miller-column-item-height);
+
+  padding: 0 var(--miller-column-item-padding-right) 0 var(--miller-column-item-padding-left);
+  margin: 0 0 var(--miller-column-item-margin-bottom) 0;
+
+  border-radius: var(--miller-column-item-border-radius);
+
+  transition: background-color var(--global-animation-duration-100) ease-in-out;
+
+  font-size: var(--selectlist-option-text-size);
+  font-weight: var(--selectlist-option-text-font-weight);
+  font-style: normal;
+
+  cursor: default;
+
+  outline: none;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    height: var(--miller-column-item-height);
+
+    background-color: transparent;
+
+    border-radius: var(--miller-column-item-border-radius);
+  }
+
+  &.is-selectable,
+  &.is-selected,
+  &:hover,
+  &:focus {
+    /* checkbox on the left, shows up always */
+    .Checkbox {
+      display: inline-flex;
+    }
+  }
+
+  &.is-branch {
+    /* show chevron */
+    .AssetList-itemChildIndicator {
+      display: block;
+    }
+  }
+
+  .AssetList-itemThumbnail {
+    /* Remove the border on images inside links in IE 10-. */
+    border-style: none;
+
+    width: var(--miller-column-thumbnail-width);
+    height: var(--miller-column-thumbnail-height);
+    margin-left: var(--miller-column-thumbnail-margin-left);
+    vertical-align: middle;
+  }
+}
+
+.AssetList-itemSelector {
+  display: none;
+  margin: var(--miller-column-checkbox-margin);
+}
+
+.AssetList-itemChildIndicator {
+  display: none;
+  transition: transform ease var(--global-animation-duration-100);
+}
+
+.AssetList-itemLabel {
+  flex: 1;
+  padding-left: var(--miller-column-item-label-padding-left);
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

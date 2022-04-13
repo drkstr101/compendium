@@ -1,0 +1,1029 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+:root {
+  /* Overridden because of the way we draw focus rings */
+  --actionbutton-quiet-border-size-key-focus: 1px;
+}
+
+.LogicButton,
+.Button,
+.ActionButton--emphasized {
+  &:focus-ring,
+  &.is-focused {
+    &:after {
+      box-shadow: 0 0 0 var(--button-primary-focus-ring-size-key-focus)
+        var(--button-primary-focus-ring-color-key-focus);
+    }
+  }
+}
+
+.ClearButton {
+  background-color: var(--clearbutton-medium-background-color);
+
+  color: var(--clearbutton-medium-icon-color);
+
+  .Icon {
+    fill: var(--clearbutton-medium-icon-color);
+  }
+
+  &:hover {
+    background-color: var(--clearbutton-medium-background-color-hover);
+
+    color: var(--clearbutton-medium-icon-color-hover);
+
+    .Icon {
+      fill: var(--clearbutton-medium-icon-color-hover);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--clearbutton-medium-background-color-down);
+
+    color: var(--clearbutton-medium-icon-color-down);
+
+    .Icon {
+      fill: var(--clearbutton-medium-icon-color-down);
+    }
+  }
+
+  &:focus-ring {
+    background-color: var(--clearbutton-medium-background-color-key-focus);
+
+    color: var(--clearbutton-medium-icon-color-key-focus);
+
+    .Icon {
+      fill: var(--clearbutton-medium-icon-color-key-focus);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--clearbutton-medium-background-color-disabled);
+
+    color: var(--clearbutton-medium-icon-color-disabled);
+
+    .Icon {
+      fill: var(--clearbutton-medium-icon-color-disabled);
+    }
+  }
+}
+
+.Button--cta {
+  background-color: var(--button-cta-background-color);
+  border-color: var(--button-cta-border-color);
+  color: var(--button-cta-text-color);
+
+  &:hover {
+    background-color: var(--button-cta-background-color-hover);
+    border-color: var(--button-cta-border-color-hover);
+    color: var(--button-cta-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-cta-background-color-key-focus);
+    border-color: var(--button-cta-border-color-key-focus);
+    color: var(--button-cta-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-cta-background-color-down);
+    border-color: var(--button-cta-border-color-down);
+    color: var(--button-cta-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-cta-background-color-disabled);
+    border-color: var(--button-cta-border-color-disabled);
+    color: var(--button-cta-text-color-disabled);
+  }
+}
+
+.Button--primary {
+  background-color: var(--button-primary-background-color);
+  border-color: var(--button-primary-border-color);
+  color: var(--button-primary-text-color);
+
+  &:hover {
+    background-color: var(--button-primary-background-color-hover);
+    border-color: var(--button-primary-border-color-hover);
+    color: var(--button-primary-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-primary-background-color-key-focus);
+    border-color: var(--button-primary-border-color-key-focus);
+    color: var(--button-primary-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-primary-background-color-down);
+    border-color: var(--button-primary-border-color-down);
+    color: var(--button-primary-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-primary-background-color-disabled);
+    border-color: var(--button-primary-border-color-disabled);
+    color: var(--button-primary-text-color-disabled);
+  }
+}
+
+.Button--secondary {
+  background-color: var(--button-secondary-background-color);
+  border-color: var(--button-secondary-border-color);
+  color: var(--button-secondary-text-color);
+
+  &:hover {
+    background-color: var(--button-secondary-background-color-hover);
+    border-color: var(--button-secondary-border-color-hover);
+    color: var(--button-secondary-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-secondary-background-color-key-focus);
+    border-color: var(--button-secondary-border-color-key-focus);
+    color: var(--button-secondary-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-secondary-background-color-down);
+    border-color: var(--button-secondary-border-color-down);
+    color: var(--button-secondary-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-secondary-background-color-disabled);
+    border-color: var(--button-secondary-border-color-disabled);
+    color: var(--button-secondary-text-color-disabled);
+  }
+}
+
+.Button--warning {
+  background-color: var(--button-warning-background-color);
+  border-color: var(--button-warning-border-color);
+  color: var(--button-warning-text-color);
+
+  &:hover {
+    background-color: var(--button-warning-background-color-hover);
+    border-color: var(--button-warning-border-color-hover);
+    color: var(--button-warning-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-warning-background-color-key-focus);
+    border-color: var(--button-warning-border-color-key-focus);
+    color: var(--button-warning-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-warning-background-color-down);
+    border-color: var(--button-warning-border-color-down);
+    color: var(--button-warning-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-warning-background-color-disabled);
+    border-color: var(--button-warning-border-color-disabled);
+    color: var(--button-warning-text-color-disabled);
+  }
+}
+
+.Button--overBackground {
+  background-color: var(--button-over-background-background-color);
+  border-color: var(--button-over-background-border-color);
+  color: var(--button-over-background-text-color);
+
+  &:hover {
+    background-color: var(--button-over-background-background-color-hover);
+    border-color: var(--button-over-background-border-color-hover);
+    color: inherit;
+  }
+
+  &:focus-ring {
+    background-color: var(--button-over-background-background-color-hover);
+    border-color: var(--button-over-background-border-color-hover);
+    color: inherit;
+
+    &:after {
+      box-shadow: 0 0 0 var(--alias-focus-ring-size)
+        var(--button-over-background-border-color-key-focus);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--button-over-background-background-color-down);
+    border-color: var(--button-over-background-border-color-down);
+    color: inherit;
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-over-background-background-color-disabled);
+    border-color: var(--button-over-background-border-color-disabled);
+    color: var(--button-over-background-text-color-disabled);
+  }
+}
+
+.Button--overBackground.Button--quiet,
+.ClearButton--overBackground {
+  background-color: var(--button-quiet-over-background-background-color);
+  border-color: var(--button-quiet-over-background-border-color);
+  color: var(--button-quiet-over-background-text-color);
+
+  &:hover {
+    background-color: var(--button-quiet-over-background-background-color-hover);
+    border-color: var(--button-quiet-over-background-border-color-hover);
+    color: var(--button-quiet-over-background-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-quiet-over-background-background-color-hover);
+    border-color: var(--button-quiet-over-background-border-color-hover);
+    color: var(--button-quiet-over-background-text-color-hover);
+    box-shadow: none;
+
+    &:after {
+      box-shadow: 0 0 0 var(--alias-focus-ring-size)
+        var(--button-over-background-border-color-key-focus);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--button-quiet-over-background-background-color-down);
+    border-color: var(--button-quiet-over-background-border-color-down);
+    color: var(--button-quiet-over-background-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-quiet-over-background-background-color-disabled);
+    border-color: var(--button-quiet-over-background-border-color-disabled);
+    color: var(--button-quiet-over-background-text-color-disabled);
+  }
+}
+
+.Button--primary.Button--quiet {
+  background-color: var(--button-quiet-primary-background-color);
+  border-color: var(--button-quiet-primary-border-color);
+  color: var(--button-quiet-primary-text-color);
+
+  &:hover {
+    background-color: var(--button-quiet-primary-background-color-hover);
+    border-color: var(--button-quiet-primary-border-color-hover);
+    color: var(--button-quiet-primary-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-quiet-primary-background-color-key-focus);
+    border-color: var(--button-quiet-primary-border-color-key-focus);
+    color: var(--button-quiet-primary-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-quiet-primary-background-color-down);
+    border-color: var(--button-quiet-primary-border-color-down);
+    color: var(--button-quiet-primary-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-quiet-primary-background-color-disabled);
+    border-color: var(--button-quiet-primary-border-color-disabled);
+    color: var(--button-quiet-primary-text-color-disabled);
+  }
+}
+
+.Button--secondary.Button--quiet {
+  background-color: var(--button-quiet-secondary-background-color);
+  border-color: var(--button-quiet-secondary-border-color);
+  color: var(--button-quiet-secondary-text-color);
+
+  &:hover {
+    background-color: var(--button-quiet-secondary-background-color-hover);
+    border-color: var(--button-quiet-secondary-border-color-hover);
+    color: var(--button-quiet-secondary-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-quiet-secondary-background-color-key-focus);
+    border-color: var(--button-quiet-secondary-border-color-key-focus);
+    color: var(--button-quiet-secondary-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-quiet-secondary-background-color-down);
+    border-color: var(--button-quiet-secondary-border-color-down);
+    color: var(--button-quiet-secondary-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-quiet-secondary-background-color-disabled);
+    border-color: var(--button-quiet-secondary-border-color-disabled);
+    color: var(--button-quiet-secondary-text-color-disabled);
+  }
+}
+
+.ActionButton {
+  background-color: var(--actionbutton-background-color);
+  border-color: var(--actionbutton-border-color);
+  color: var(--actionbutton-text-color);
+
+  .Icon {
+    fill: var(--actionbutton-icon-color);
+  }
+
+  .ActionButton-hold {
+    fill: var(--actionbutton-hold-icon-color);
+  }
+
+  &:hover {
+    background-color: var(--actionbutton-background-color-hover);
+    border-color: var(--actionbutton-border-color-hover);
+    color: var(--actionbutton-text-color-hover);
+
+    .Icon {
+      fill: var(--actionbutton-icon-color-hover);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-hold-icon-color-hover);
+    }
+  }
+
+  &:focus-ring {
+    background-color: var(--actionbutton-background-color-key-focus);
+    border-color: var(--actionbutton-border-color-key-focus);
+    box-shadow: 0 0 0 var(--button-primary-border-size-increase-key-focus)
+      var(--actionbutton-border-color-key-focus);
+    color: var(--actionbutton-text-color-key-focus);
+
+    &.is-active {
+      border-color: var(--actionbutton-border-color-key-focus);
+    }
+
+    .Icon {
+      fill: var(--actionbutton-icon-color-key-focus);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-hold-icon-color-key-focus);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--actionbutton-background-color-down);
+    border-color: var(--actionbutton-border-color-down);
+    color: var(--actionbutton-text-color-down);
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-hold-icon-color-down);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--actionbutton-background-color-disabled);
+    border-color: var(--actionbutton-border-color-disabled);
+    color: var(--actionbutton-text-color-disabled);
+
+    .Icon {
+      fill: var(--actionbutton-icon-color-disabled);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-hold-icon-color-disabled);
+    }
+  }
+
+  &.is-selected {
+    background-color: var(--actionbutton-background-color-selected);
+    border-color: var(--actionbutton-border-color-selected);
+    color: var(--actionbutton-text-color-selected);
+
+    .Icon {
+      fill: var(--actionbutton-icon-color-selected);
+    }
+
+    &:hover {
+      background-color: var(--actionbutton-background-color-selected-hover);
+      border-color: var(--actionbutton-border-color-selected-hover);
+      color: var(--actionbutton-text-color-selected-hover);
+
+      .Icon {
+        fill: var(--actionbutton-icon-color-selected-hover);
+      }
+    }
+
+    &:focus-ring {
+      background-color: var(--actionbutton-background-color-selected-key-focus);
+      border-color: var(--actionbutton-border-color-selected-key-focus);
+      color: var(--actionbutton-text-color-selected-key-focus);
+
+      &.is-active {
+        border-color: var(--actionbutton-border-color-key-focus);
+      }
+
+      .Icon {
+        fill: var(--actionbutton-icon-color-selected-key-focus);
+      }
+    }
+
+    &.is-active {
+      background-color: var(--actionbutton-background-color-selected-down);
+      border-color: var(--actionbutton-border-color-selected-down);
+      color: var(--actionbutton-text-color-selected-down);
+
+      .Icon {
+        fill: var(--actionbutton-icon-color-selected-down);
+      }
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: var(--actionbutton-background-color-selected-disabled);
+      border-color: var(--actionbutton-border-color-selected-disabled);
+      color: var(--actionbutton-text-color-selected-disabled);
+
+      .Icon {
+        fill: var(--actionbutton-icon-color-selected-disabled);
+      }
+    }
+  }
+}
+
+.ActionButton--emphasized {
+  background-color: var(--actionbutton-emphasized-background-color);
+  border-color: var(--actionbutton-emphasized-border-color);
+  color: var(--actionbutton-emphasized-text-color);
+
+  .Icon {
+    fill: var(--actionbutton-emphasized-icon-color);
+  }
+
+  .ActionButton-hold {
+    fill: var(--actionbutton-emphasized-hold-icon-color);
+  }
+
+  &.is-selected {
+    .ActionButton-hold {
+      fill: var(--actionbutton-emphasized-hold-icon-color-selected);
+    }
+
+    &:hover {
+      .ActionButton-hold {
+        fill: var(--actionbutton-emphasized-text-color-selected-hover);
+      }
+    }
+  }
+
+  &:hover {
+    background-color: var(--actionbutton-emphasized-background-color-hover);
+    border-color: var(--actionbutton-emphasized-border-color-hover);
+    box-shadow: none;
+    color: var(--actionbutton-emphasized-text-color-hover);
+
+    .Icon {
+      fill: var(--actionbutton-emphasized-icon-color-hover);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-emphasized-hold-icon-color-hover);
+    }
+  }
+
+  &:focus-ring {
+    background-color: var(--actionbutton-emphasized-background-color-key-focus);
+    border-color: var(--actionbutton-emphasized-border-color);
+    box-shadow: none;
+    color: var(--actionbutton-emphasized-text-color-key-focus);
+
+    &.is-active {
+      border-color: var(--actionbutton-emphasized-border-color-down);
+    }
+
+    .Icon {
+      fill: var(--actionbutton-emphasized-icon-color-key-focus);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-emphasized-hold-icon-color-key-focus);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--actionbutton-emphasized-background-color-down);
+    border-color: var(--actionbutton-emphasized-border-color-down);
+    color: var(--actionbutton-emphasized-text-color-down);
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-emphasized-hold-icon-color-down);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--actionbutton-emphasized-background-color-disabled);
+    border-color: var(--actionbutton-emphasized-border-color-disabled);
+    color: var(--actionbutton-emphasized-text-color-disabled);
+
+    .Icon {
+      fill: var(--actionbutton-emphasized-icon-color-disabled);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-emphasized-hold-icon-color-disabled);
+    }
+  }
+
+  &.ActionButton--quiet {
+    &:focus-ring {
+      border-color: var(--actionbutton-quiet-border-color);
+      box-shadow: none;
+    }
+  }
+
+  &.ActionButton--quiet.is-selected,
+  &.is-selected {
+    background-color: var(--actionbutton-emphasized-background-color-selected);
+    border-color: var(--actionbutton-emphasized-border-color-selected);
+    color: var(--actionbutton-emphasized-text-color-selected);
+
+    .Icon {
+      fill: var(--actionbutton-emphasized-icon-color-selected);
+    }
+
+    &:focus-ring {
+      background-color: var(--actionbutton-emphasized-background-color-selected-key-focus);
+      border-color: var(--actionbutton-emphasized-border-color-selected);
+      box-shadow: none;
+      color: var(--actionbutton-emphasized-text-color-selected-key-focus);
+
+      &.is-active {
+        border-color: var(--actionbutton-emphasized-border-color-selected-down);
+      }
+
+      .Icon {
+        fill: var(--actionbutton-emphasized-icon-color-selected-key-focus);
+      }
+    }
+
+    &:hover {
+      background-color: var(--actionbutton-emphasized-background-color-selected-hover);
+      border-color: var(--actionbutton-emphasized-border-color-selected-hover);
+      color: var(--actionbutton-emphasized-text-color-selected-hover);
+
+      .Icon {
+        fill: var(--actionbutton-emphasized-icon-color-selected-hover);
+      }
+    }
+
+    &.is-active {
+      background-color: var(--actionbutton-emphasized-background-color-selected-down);
+      border-color: var(--actionbutton-emphasized-border-color-selected-down);
+      color: var(--actionbutton-emphasized-text-color-selected-down);
+
+      .Icon {
+        fill: var(--actionbutton-emphasized-icon-color-selected-down);
+      }
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: var(--actionbutton-emphasized-background-color-selected-disabled);
+      border-color: var(--actionbutton-emphasized-border-color-selected-disabled);
+      color: var(--actionbutton-emphasized-text-color-selected-disabled);
+
+      .Icon {
+        fill: var(--actionbutton-emphasized-icon-color-selected-disabled);
+      }
+    }
+  }
+}
+
+.ActionButton--quiet {
+  background-color: var(--actionbutton-quiet-background-color);
+  border-color: var(--actionbutton-quiet-border-color);
+  color: var(--actionbutton-quiet-text-color);
+
+  &:hover {
+    background-color: var(--actionbutton-quiet-background-color-hover);
+    border-color: var(--actionbutton-quiet-border-color-hover);
+    color: var(--actionbutton-quiet-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--actionbutton-quiet-background-color-key-focus);
+    box-shadow: 0 0 0 var(--actionbutton-quiet-border-size-key-focus)
+      var(--actionbutton-quiet-border-color-key-focus);
+    border-color: var(--actionbutton-quiet-border-color-key-focus);
+    color: var(--actionbutton-quiet-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--actionbutton-quiet-background-color-down);
+    border-color: var(--actionbutton-quiet-border-color-down);
+    color: var(--actionbutton-quiet-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--actionbutton-quiet-background-color-disabled);
+    border-color: var(--actionbutton-quiet-border-color-disabled);
+    color: var(--actionbutton-quiet-text-color-disabled);
+  }
+
+  &.is-selected {
+    background-color: var(--actionbutton-quiet-background-color-selected);
+    border-color: var(--actionbutton-quiet-border-color-selected);
+    color: var(--actionbutton-quiet-text-color-selected);
+
+    &:hover {
+      background-color: var(--actionbutton-quiet-background-color-selected-hover);
+      border-color: var(--actionbutton-quiet-border-color-selected-hover);
+      color: var(--actionbutton-quiet-text-color-selected-hover);
+    }
+
+    &:focus-ring {
+      background-color: var(--actionbutton-quiet-background-color-selected-key-focus);
+      border-color: var(--actionbutton-quiet-border-color-selected-key-focus);
+      color: var(--actionbutton-quiet-text-color-selected-key-focus);
+    }
+
+    &.is-active {
+      background-color: var(--actionbutton-quiet-background-color-selected-down);
+      border-color: var(--actionbutton-quiet-border-color-selected-down);
+      color: var(--actionbutton-quiet-text-color-selected-down);
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: var(--actionbutton-quiet-background-color-selected-disabled);
+      border-color: var(--actionbutton-quiet-border-color-selected-disabled);
+      color: var(--actionbutton-quiet-text-color-selected-disabled);
+    }
+  }
+}
+
+.ActionButton--staticWhite {
+  mix-blend-mode: screen;
+  --actionbutton-static-background-color-hover: rgba(255, 255, 255, 0.1);
+  --actionbutton-static-background-color-focus: rgba(255, 255, 255, 0.1);
+  --actionbutton-static-background-color-active: rgba(255, 255, 255, 0.2);
+  --actionbutton-static-border-color: rgba(255, 255, 255, 0.3);
+  --actionbutton-static-border-color-hover: white;
+  --actionbutton-static-border-color-active: white;
+  --actionbutton-static-border-color-focus: white;
+  --actionbutton-static-border-disabled: rgba(255, 255, 255, 0.15);
+  --actionbutton-static-color: white;
+  --actionbutton-static-color-selected: black; /* becomes the background of the parent element due to mix-blend-mode */
+  --actionbutton-static-color-disabled: rgba(255, 255, 255, 0.15);
+}
+
+.ActionButton--staticWhite.ActionButton--quiet {
+  --actionbutton-static-border-color: transparent;
+  --actionbutton-static-border-color-hover: transparent;
+  --actionbutton-static-border-color-active: transparent;
+}
+
+.ActionButton--staticBlack {
+  mix-blend-mode: multiply;
+  --actionbutton-static-background-color-hover: rgba(0, 0, 0, 0.1);
+  --actionbutton-static-background-color-focus: rgba(0, 0, 0, 0.1);
+  --actionbutton-static-background-color-active: rgba(0, 0, 0, 0.2);
+  --actionbutton-static-border-color: rgba(0, 0, 0, 0.3);
+  --actionbutton-static-border-color-hover: black;
+  --actionbutton-static-border-color-active: black;
+  --actionbutton-static-border-color-focus: black;
+  --actionbutton-static-border-disabled: rgba(0, 0, 0, 0.15);
+  --actionbutton-static-color: black;
+  --actionbutton-static-color-selected: white; /* becomes the background of the parent element due to mix-blend-mode */
+  --actionbutton-static-color-disabled: rgba(0, 0, 0, 0.15);
+}
+
+.ActionButton--staticBlack.ActionButton--quiet {
+  --actionbutton-static-border-color: transparent;
+  --actionbutton-static-border-color-hover: transparent;
+  --actionbutton-static-border-color-active: transparent;
+}
+
+.ActionButton--staticColor {
+  background-color: transparent;
+  border-color: var(--actionbutton-static-border-color);
+  color: var(--actionbutton-static-color);
+
+  .Icon {
+    fill: var(--actionbutton-static-color);
+  }
+
+  &:hover {
+    background-color: var(--actionbutton-static-background-color-hover);
+    border-color: var(--actionbutton-static-border-color-hover);
+    color: var(--actionbutton-static-color);
+
+    .Icon {
+      fill: var(--actionbutton-static-color);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-static-color);
+    }
+  }
+
+  &:focus-ring {
+    background-color: var(--actionbutton-static-background-color-focus);
+    border-color: var(--actionbutton-static-border-color-focus);
+    box-shadow: none;
+    color: var(--actionbutton-static-color);
+
+    &:hover {
+      border-color: var(--actionbutton-static-border-color-focus);
+    }
+
+    &.is-active {
+      border-color: var(--actionbutton-static-color-focus);
+    }
+
+    .Icon {
+      fill: var(--actionbutton-static-color);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-static-color);
+    }
+
+    &:after {
+      box-shadow: 0 0 0 var(--button-primary-focus-ring-size-key-focus)
+        var(--actionbutton-static-border-color-focus);
+    }
+  }
+
+  &.is-active {
+    background-color: var(--actionbutton-static-background-color-active);
+    border-color: var(--actionbutton-static-border-color-active);
+    color: var(--actionbutton-static-color);
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-static-color);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: transparent;
+    border-color: var(--actionbutton-static-border-disabled);
+    color: var(--actionbutton-static-color-disabled);
+
+    .Icon {
+      fill: var(--actionbutton-static-color-disabled);
+    }
+
+    .ActionButton-hold {
+      fill: var(--actionbutton-static-color-disabled);
+    }
+  }
+
+  &.ActionButton--quiet.is-selected,
+  &.is-selected {
+    background-color: var(--actionbutton-static-color);
+    border-color: var(--actionbutton-static-color);
+    color: var(--actionbutton-static-color-selected);
+
+    .Icon {
+      fill: var(--actionbutton-static-color-selected);
+    }
+
+    &:focus-ring {
+      background-color: var(--actionbutton-static-color);
+      border-color: var(--actionbutton-static-color);
+      color: var(--actionbutton-static-color-selected);
+      box-shadow: none;
+
+      &.is-active {
+        /* change 1px of focus ring blue to match the rest of the active state */
+        box-shadow: none;
+        border-color: var(--actionbutton-static-color);
+      }
+
+      .Icon {
+        fill: var(--actionbutton-static-color-selected);
+      }
+    }
+
+    &:hover,
+    &.is-active {
+      background-color: var(--actionbutton-static-color);
+      border-color: var(--actionbutton-static-color);
+      color: var(--actionbutton-static-color-selected);
+
+      .Icon {
+        fill: var(--actionbutton-static-color-selected);
+      }
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: transparent;
+      border-color: var(--actionbutton-static-border-disabled);
+      color: var(--actionbutton-static-color-disabled);
+
+      .Icon {
+        fill: var(--actionbutton-static-color-disabled);
+      }
+
+      .ActionButton-hold {
+        fill: var(--actionbutton-static-color-disabled);
+      }
+    }
+  }
+}
+
+.Button--warning.Button--quiet {
+  background-color: var(--button-quiet-warning-background-color);
+  border-color: var(--button-quiet-warning-border-color);
+  color: var(--button-quiet-warning-text-color);
+
+  &:hover {
+    background-color: var(--button-quiet-warning-background-color-hover);
+    border-color: var(--button-quiet-warning-border-color-hover);
+    color: var(--button-quiet-warning-text-color-hover);
+  }
+
+  &:focus-ring {
+    background-color: var(--button-quiet-warning-background-color-key-focus);
+    border-color: var(--button-quiet-warning-border-color-key-focus);
+    color: var(--button-quiet-warning-text-color-key-focus);
+  }
+
+  &.is-active {
+    background-color: var(--button-quiet-warning-background-color-down);
+    border-color: var(--button-quiet-warning-border-color-down);
+    color: var(--button-quiet-warning-text-color-down);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-quiet-warning-background-color-disabled);
+    border-color: var(--button-quiet-warning-border-color-disabled);
+    color: var(--button-quiet-warning-text-color-disabled);
+  }
+}
+
+.LogicButton--and {
+  background-color: var(--logicbutton-and-background-color);
+  border-color: var(--logicbutton-and-border-color);
+  color: var(--logicbutton-and-text-color);
+
+  &:hover {
+    background-color: var(--logicbutton-and-background-color-hover);
+    border-color: var(--logicbutton-and-border-color-hover);
+    color: var(--logicbutton-and-text-color);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--logicbutton-and-background-color-disabled);
+    border-color: var(--logicbutton-and-border-color-disabled);
+    color: var(--logicbutton-and-text-color-disabled);
+  }
+}
+
+.LogicButton--or {
+  background-color: var(--logicbutton-or-background-color);
+  border-color: var(--logicbutton-or-border-color);
+  color: var(--logicbutton-or-text-color);
+
+  &:hover {
+    background-color: var(--logicbutton-or-background-color-hover);
+    border-color: var(--logicbutton-or-border-color-hover);
+    color: var(--logicbutton-or-text-color);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--button-secondary-background-color-disabled);
+    border-color: var(--button-secondary-border-color-disabled);
+    color: var(--logicbutton-and-text-color-disabled);
+  }
+}
+
+.FieldButton {
+  color: var(--fieldbutton-text-color);
+  background-color: var(--fieldbutton-background-color);
+  border-color: var(--fieldbutton-border-color);
+
+  &:hover {
+    color: var(--fieldbutton-text-color-hover);
+    background-color: var(--fieldbutton-background-color-hover);
+    border-color: var(--fieldbutton-border-color-hover);
+  }
+
+  &.is-active,
+  &.is-selected {
+    background-color: var(--fieldbutton-background-color-down);
+    border-color: var(--fieldbutton-border-color-down);
+  }
+
+  &:focus-ring,
+  &.is-focused {
+    background-color: var(--fieldbutton-background-color-key-focus);
+    border-color: var(--fieldbutton-border-color-key-focus);
+    box-shadow: 0 0 0 var(--button-primary-border-size-increase-key-focus)
+      var(--fieldbutton-border-color-key-focus);
+    color: var(--fieldbutton-text-color-key-focus);
+
+    &.is-placeholder {
+      color: var(--fieldbutton-placeholder-text-color-key-focus);
+    }
+  }
+
+  &.FieldButton--invalid {
+    border-color: var(--fieldbutton-border-color-error);
+
+    &:hover {
+      border-color: var(--fieldbutton-border-color-error-hover);
+    }
+
+    &.is-active,
+    &.is-selected {
+      border-color: var(--fieldbutton-border-color-error-down);
+    }
+
+    &:focus-ring,
+    &.is-focused {
+      border-color: var(--fieldbutton-border-color-error-key-focus);
+      box-shadow: 0 0 0 var(--button-primary-border-size-increase-key-focus)
+        var(--fieldbutton-border-color-error-key-focus);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--fieldbutton-background-color-disabled);
+    color: var(--fieldbutton-text-color-disabled);
+
+    & .Icon {
+      fill: var(--fieldbutton-icon-color-disabled);
+    }
+  }
+}
+
+.FieldButton--quiet {
+  color: var(--fieldbutton-text-color);
+  border-color: var(--fieldbutton-quiet-border-color);
+  background-color: var(--fieldbutton-quiet-background-color);
+
+  &:hover {
+    background-color: var(--fieldbutton-quiet-background-color-hover);
+    color: var(--fieldbutton-text-color-hover);
+  }
+
+  &:focus-ring,
+  &.is-focused {
+    background-color: var(--fieldbutton-quiet-background-color-key-focus);
+    box-shadow: 0 2px 0 0 var(--fieldbutton-border-color-key-focus);
+
+    &.is-placeholder {
+      color: var(--fieldbutton-quiet-placeholder-text-color-key-focus);
+    }
+  }
+
+  &.is-active,
+  &.is-selected {
+    background-color: var(--fieldbutton-quiet-background-color-down);
+    border-color: var(--fieldbutton-quiet-border-color-down);
+
+    &:focus-ring,
+    &.is-focused {
+      background-color: var(--fieldbutton-quiet-background-color-key-focus);
+      box-shadow: 0 2px 0 0 var(--fieldbutton-border-color-key-focus);
+    }
+  }
+
+  &.FieldButton--invalid {
+    &:focus-ring,
+    &.is-focused {
+      box-shadow: 0 2px 0 0 var(--fieldbutton-border-color-error-key-focus);
+    }
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background-color: var(--fieldbutton-quiet-background-color-disabled);
+    color: var(--fieldbutton-text-color-disabled);
+  }
+}

@@ -1,0 +1,303 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --table-cell-compact-padding-y: var(--global-dimension-size-75);
+  --table-cell-regular-padding-y: var(--global-dimension-size-125);
+  --table-cell-spacious-padding-y: var(--global-dimension-size-175);
+}
+
+.Table {
+  border-collapse: separate;
+  border-spacing: 0;
+  outline: none;
+  isolation: isolate;
+}
+
+/* specificity must be higher than `.Icon` */
+svg.Table-sortedIcon {
+  display: none;
+  margin-inline-start: var(--table-header-sort-icon-gap);
+  min-inline-size: var(--icon-arrow-down-small-width);
+
+  vertical-align: middle;
+
+  transition: transform var(--global-animation-duration-100) ease-in-out;
+}
+
+.Table-headWrapper {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.Table-headCell {
+  box-sizing: border-box;
+  font-size: var(--table-header-text-size);
+  font-weight: var(--table-header-text-font-weight);
+  line-height: var(--table-header-text-line-height);
+  min-height: var(--table-header-min-height);
+  letter-spacing: var(--table-header-text-letter-spacing);
+  text-transform: uppercase;
+  padding: var(--table-header-padding-y) var(--table-header-padding-x);
+  transition: color var(--global-animation-duration-100) ease-in-out;
+  cursor: default;
+  outline: 0;
+  border-radius: var(--table-header-border-radius);
+
+  &.is-sortable {
+    cursor: default;
+  }
+
+  &.is-sorted-asc,
+  &.is-sorted-desc {
+    .Table-sortedIcon {
+      display: inline-block;
+      /* offset icon because it's not properly aligned */
+      margin-top: calc(var(--global-dimension-size-25) * -1);
+    }
+  }
+
+  &.is-sorted-asc {
+    .Table-sortedIcon {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.Table-cell--alignCenter {
+  text-align: center;
+}
+
+.Table-cell--alignEnd {
+  text-align: end;
+}
+
+/* Helper for shared drop target overlay */
+%drop-target {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+  }
+}
+
+.Table-body {
+  position: relative;
+
+  border-width: var(--table-border-size);
+  border-radius: var(--table-border-radius);
+  overflow: auto;
+  vertical-align: var(--table-cell-vertical-alignment);
+
+  /* Fix scrollbars on iOS with sticky row headers */
+  transform: translate3d(0, 0, 0);
+
+  &.is-drop-target {
+    @inherit: %drop-target;
+  }
+}
+
+/* The tbody tag doesn't allow setting a border-radius, so these hacks are to make that work
+   by putting it on the individual cells instead. */
+.Table:not(.Table--quiet) {
+  tbody.Table-body {
+    border-width: var(--table-border-size);
+    border-radius: var(--table-border-radius);
+
+    .Table-row:first-child .Table-cell:first-child {
+      border-top-left-radius: var(--table-border-radius);
+    }
+
+    .Table-row:first-child .Table-cell:last-child {
+      border-top-right-radius: var(--table-border-radius);
+    }
+
+    .Table-row:last-child .Table-cell:first-child {
+      border-bottom-left-radius: var(--table-border-radius);
+    }
+
+    .Table-row:last-child .Table-cell:last-child {
+      border-bottom-right-radius: var(--table-border-radius);
+    }
+  }
+}
+
+.Table-cell {
+  box-sizing: border-box;
+  font-size: var(--table-cell-text-size);
+  font-weight: var(--table-cell-text-font-weight);
+  /* need to subtract 1px here because 14px * 1.5 + 14px + 14px = 49px, and we want 48px */
+  line-height: calc(
+    calc(var(--table-cell-text-size) * var(--table-cell-text-line-height)) - 1px
+  );
+  padding: var(--table-cell-regular-padding-y) var(--table-cell-padding-x);
+}
+
+.Table--compact .Table-cell {
+  padding-top: var(--table-cell-compact-padding-y);
+  padding-bottom: var(--table-cell-compact-padding-y);
+}
+
+.Table--spacious .Table-cell {
+  padding-top: var(--table-cell-spacious-padding-y);
+  padding-bottom: var(--table-cell-spacious-padding-y);
+}
+
+.Table-cellContents {
+  flex: 1 1 0%;
+  /* To ensure the flex child only takes up available width, see https://makandracards.com/makandra/66994-css-flex-and-min-width */
+  min-width: 0px;
+
+  /* truncate text with ellipsis */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  /* allow focus ring of child to extend outside the bounds */
+  padding: 4px;
+  margin: -4px;
+}
+
+.Table-cell--hideHeader {
+  padding: 0;
+  justify-content: center;
+}
+
+.Table--wrap .Table-cellContents {
+  white-space: normal;
+}
+
+.Table-cell,
+.Table-headCell {
+  position: relative;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-ring,
+  &.is-focused {
+    outline: none;
+
+    &::before {
+      content: '';
+
+      /* Float above border */
+      z-index: 1;
+      position: absolute;
+
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      border-radius: calc(var(--table-cell-border-radius-key-focus) - 1px);
+    }
+  }
+}
+
+.Table-headCell {
+  &:focus-ring,
+  &.is-focused {
+    &::before {
+      top: var(--table-border-size);
+      right: var(--table-border-size);
+      bottom: var(--table-border-size);
+      left: var(--table-border-size);
+    }
+  }
+}
+
+.Table-cell--divider {
+  border-inline-end-width: var(--table-divider-border-size);
+}
+
+.Table-row {
+  position: relative;
+  cursor: default;
+  transition: background-color var(--global-animation-duration-100) ease-in-out;
+
+  &:focus {
+    outline: 0;
+  }
+
+  /* The focus ring must be on top of the first cell, so needs to be absolutely positioned. */
+  &:focus-ring {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: var(--selectlist-border-size-key-focus);
+      z-index: 3;
+    }
+  }
+
+  &.is-drop-target {
+    @inherit: %drop-target;
+  }
+}
+
+/* the CSS logical properties postcss plugin doesn't seem to work with :focus-ring. */
+[dir='rtl'] .Table-row:focus-ring:before {
+  right: 0;
+}
+
+.Table > .Table-body > .Table-row:last-of-type {
+  border-bottom-style: none;
+}
+
+.Table--quiet {
+  .Table-headWrapper {
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .Table-body {
+    border-radius: var(--table-quiet-border-radius);
+  }
+
+  .Table-body,
+  .Table-row {
+    &.is-drop-target {
+      &::before {
+        border-radius: var(--border-radius);
+      }
+    }
+  }
+}
+
+.Table-headCell.Table-checkboxCell,
+.Table-cell.Table-checkboxCell {
+  padding-inline-end: var(--table-cell-checkbox-padding-right);
+  /* have to eliminate vertical padding to allow proper vertical alignment */
+  padding-top: 0px;
+  padding-bottom: 0px;
+  vertical-align: var(--table-cell-checkbox-vertical-alignment);
+
+  .Table-checkbox {
+    padding-inline-end: 0px;
+  }
+}
+
+.Table-checkbox {
+  vertical-align: super;
+}

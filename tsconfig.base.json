@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2017",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@compendium/api": ["libs/api/src/index.ts"],
+      "@compendium/content.readme": ["libs/content/readme/src/index.ts"],
+      "@compendium/dev.docs.css-module-preview": [
+        "libs/dev/docs/css-module-preview/src/index.ts"
+      ],
+      "@compendium/env.spectrum": ["libs/env/spectrum/src/index.ts"],
+      "@compendium/model.types": ["libs/model/types/src/index.ts"],
+      "@compendium/theme.dark-theme": ["libs/theme/dark-theme/src/index.ts"],
+      "@compendium/theme.default-theme": ["libs/theme/default-theme/src/index.ts"],
+      "@compendium/theme.light-theme": ["libs/theme/light-theme/src/index.ts"],
+      "@compendium/theme.provider": ["libs/theme/provider/src/index.ts"],
+      "@compendium/theme.styles.*": ["libs/theme/styles/src/*/index.ts"],
+      "@compendium/theme.types": ["libs/theme/types/src/index.ts"],
+      "@compendium/ui": ["libs/ui/src/index.ts"]
+    }
+  },
+  "files": [
+    "./libs/typings/cssmodule.d.ts",
+    "./libs/typings/image.d.ts",
+    "./libs/typings/mdx.d.ts"
+  ],
+  "exclude": ["node_modules", "tmp"]
+}

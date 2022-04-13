@@ -1,0 +1,408 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  /* Todo: fix in DNA, should have been zero */
+  --fieldbutton-quiet-border-size: 0;
+  --fieldbutton-disabled-border-size: 0;
+  --fieldbutton-quiet-margin: 0;
+  --fieldbutton-quiet-padding: 0;
+
+  /* Hardcoded for wrapping study, needs to be in DNA */
+  --button-padding-y: var(--global-dimension-size-50);
+  --button-line-height: 1.3;
+}
+
+%BaseButton {
+  /* Contain halo */
+  position: relative;
+
+  display: inline-flex;
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: center;
+
+  /* Show the button overflow in Edge. */
+  overflow: visible;
+
+  /* Remove button the margin in Firefox and Safari. */
+  margin: 0;
+
+  border-style: solid;
+
+  /* Remove the inheritance of text transform on button in Edge, Firefox, and IE. */
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+  /* Font smoothing for Firefox */
+  -moz-osx-font-smoothing: grayscale;
+
+  button& {
+    /* Correct the inability to style clickable types in iOS and Safari. */
+    -webkit-appearance: button;
+  }
+
+  /* Adjacent buttons should be aligned correctly */
+  vertical-align: top;
+
+  transition: background var(--global-animation-duration-100) ease-out,
+    border-color var(--global-animation-duration-100) ease-out,
+    color var(--global-animation-duration-100) ease-out,
+    box-shadow var(--global-animation-duration-100) ease-out;
+
+  text-decoration: none;
+  font-family: var(--font-family-base);
+
+  line-height: var(--button-line-height);
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* prevent touch scrolling on buttons */
+
+  cursor: default;
+
+  isolation: isolate;
+
+  &:focus {
+    outline: none;
+  }
+  &:focus-ring {
+    z-index: 3;
+  }
+
+  /* Fix Firefox */
+  &::-moz-focus-inner {
+    border: 0;
+
+    /* Remove the inner border and padding for button in Firefox. */
+    border-style: none;
+    padding: 0;
+
+    /* Use uppercase PX so values don't get converted to rem */
+    margin-block-start: -2px;
+    margin-block-end: -2px;
+  }
+
+  &:disabled,
+  &.is-disabled {
+    cursor: default;
+  }
+
+  .Icon {
+    max-block-size: 100%;
+    flex-shrink: 0;
+    order: 0; /* always be before the label, regardless of DOM order */
+
+    transition: background var(--global-animation-duration-100) ease-out,
+      fill var(--global-animation-duration-100) ease-out;
+    box-sizing: initial;
+  }
+}
+
+%ButtonWithFocusRing {
+  &:after {
+    border-radius: calc(var(--button-primary-border-radius) + var(--alias-focus-ring-gap));
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: calc(var(--alias-focus-ring-gap) * -1);
+    transform: translateX(0); /* Forces FF to render on the pixel grid */
+
+    transition: box-shadow var(--global-animation-duration-100) ease-out,
+      margin var(--global-animation-duration-100) ease-out;
+  }
+
+  &:focus-ring {
+    &:after {
+      margin: calc(var(--alias-focus-ring-gap) * -2);
+    }
+  }
+}
+
+.Button {
+  @inherit: %BaseButton;
+  @inherit: %ButtonWithFocusRing;
+
+  border-width: var(--button-primary-border-size);
+  border-style: solid;
+  border-radius: var(--button-primary-border-radius);
+
+  min-block-size: var(--button-primary-height);
+  block-size: 0%;
+  min-inline-size: var(--button-primary-min-width);
+
+  padding: var(--button-padding-y)
+    calc(var(--button-primary-padding-x) - var(--button-primary-border-size));
+
+  /* @hack: fix button text vertical alignment at 14px */
+  padding-block-end: calc(var(--button-padding-y) + 1px);
+  padding-block-start: calc(var(--button-padding-y) - 1px);
+
+  font-size: var(--button-primary-text-size);
+  font-weight: var(--button-primary-text-font-weight);
+
+  &:hover,
+  &:active {
+    box-shadow: none;
+  }
+
+  /* there should be space between the icon and text no matter the DOM order */
+  .Icon + .Button-label {
+    margin-inline-start: var(--button-primary-text-gap);
+  }
+
+  .Button-label + .Icon {
+    margin-inline-end: var(--button-primary-text-gap);
+  }
+}
+
+a.Button,
+a.ActionButton {
+  /* Remove appearance for clickable types in iOS and Safari. */
+  -webkit-appearance: none;
+  /* Make link text not selectable  */
+  user-select: none;
+  cursor: pointer;
+}
+
+.ActionButton {
+  @inherit: %BaseButton;
+  position: relative;
+
+  block-size: var(--actionbutton-height);
+  min-inline-size: var(--actionbutton-min-width);
+
+  /* Use icon padding by default as it's smaller */
+  padding: 0;
+
+  border-width: var(--actionbutton-border-size);
+  border-radius: var(--actionbutton-border-radius);
+
+  font-size: var(--actionbutton-text-size);
+  font-weight: var(--actionbutton-text-font-weight);
+
+  /* icon should always have padding at the start */
+  .Icon {
+    padding-inline-start: var(--actionbutton-icon-padding-x);
+  }
+
+  /* label should always have padding at the end */
+  .ActionButton-label {
+    padding-inline-end: var(--actionbutton-text-padding-x);
+  }
+
+  /* icon + text buttons should have padding between the text and icon no matter the order */
+  .Icon + .ActionButton-label {
+    padding-inline-start: var(--actionbutton-icon-padding-x);
+  }
+
+  .ActionButton-label:not([hidden]) + .Icon {
+    padding-inline-end: var(--actionbutton-icon-padding-x);
+  }
+
+  /* text only buttons should have padding at the start */
+  .ActionButton-label:only-child,
+  .ActionButton-hold + .ActionButton-label:last-child {
+    padding-inline-start: var(--actionbutton-text-padding-x);
+  }
+
+  /* icon only buttons should have padding at the end */
+  .Icon:only-child,
+  .ActionButton-hold + .Icon:last-child {
+    padding-inline-end: var(--actionbutton-icon-padding-x);
+  }
+}
+
+.ActionButton-hold {
+  position: absolute;
+  inset-inline-end: var(--actionbutton-hold-icon-padding-right);
+  inset-block-end: var(--actionbutton-hold-icon-padding-bottom);
+}
+
+[dir='rtl'] .ActionButton-hold {
+  transform: rotate(90deg);
+}
+
+.ActionButton-label,
+.Button-label {
+  align-self: center;
+  justify-self: center;
+  order: 1; /* always be after the icon, regardless of DOM order */
+
+  /* Fixes horizontal alignment of text in anchor buttons */
+  text-align: center;
+
+  /* @safari10 Workaround for https://bugs.webkit.org/show_bug.cgi?id=169700 */
+  inline-size: 100%;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.ActionButton-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ActionButton--quiet {
+  border-width: var(--actionbutton-quiet-border-size);
+  border-radius: var(--actionbutton-quiet-border-radius);
+
+  font-size: var(--actionbutton-quiet-text-size);
+  font-weight: var(--actionbutton-quiet-text-font-weight);
+}
+
+.ActionButton--emphasized,
+.ActionButton--staticColor {
+  @inherit: %ButtonWithFocusRing;
+
+  &:after {
+    /* Override border-radius set in %ButtonWithFocusRing since this is not a pill button */
+    border-radius: calc(var(--actionbutton-border-radius) + var(--alias-focus-ring-gap));
+  }
+
+  &:focus-ring {
+    &:after {
+      /* action buttons only have a 1px border, not 2px */
+      margin: calc(
+        calc(var(--alias-focus-ring-gap) * -1) - var(--actionbutton-quiet-border-size)
+      );
+    }
+  }
+}
+
+.LogicButton {
+  @inherit: %BaseButton;
+  @inherit: %ButtonWithFocusRing;
+
+  block-size: var(--logicbutton-and-height);
+  padding: var(--logicbutton-and-padding-x);
+
+  border-width: var(--logicbutton-and-border-size);
+  border-radius: var(--logicbutton-and-border-radius);
+
+  font-size: var(--logicbutton-and-text-size);
+  font-weight: var(--logicbutton-and-text-font-weight);
+  line-height: 0;
+
+  &:after {
+    /* Override border-radius set in %ButtonWithFocusRing since this is not a pill button */
+    border-radius: calc(var(--logicbutton-and-border-radius) + var(--alias-focus-ring-gap));
+  }
+}
+
+.FieldButton {
+  @inherit: %BaseButton;
+
+  block-size: var(--dropdown-height);
+
+  padding: 0 var(--dropdown-padding-x);
+
+  font-family: inherit;
+  font-weight: normal;
+  font-size: var(--dropdown-text-size);
+  line-height: normal;
+  -webkit-font-smoothing: initial;
+
+  cursor: default;
+  outline: none;
+}
+
+.FieldButton {
+  margin: 0;
+  padding-block: 0;
+  padding-inline: var(--dropdown-padding-x);
+
+  border-width: var(--dropdown-border-size);
+  border-style: solid;
+  border-radius: var(--border-radius);
+
+  transition: background-color var(--global-animation-duration-100),
+    box-shadow var(--global-animation-duration-100),
+    border-color var(--global-animation-duration-100);
+
+  &:disabled,
+  &.is-disabled {
+    border-width: var(--fieldbutton-disabled-border-size);
+    cursor: default;
+  }
+
+  &.is-open {
+    border-width: var(--dropdown-border-size);
+  }
+}
+
+.FieldButton--quiet {
+  margin: var(--fieldbutton-quiet-margin);
+  padding: var(--fieldbutton-quiet-padding);
+
+  border-width: var(--fieldbutton-quiet-border-size);
+  border-radius: var(--fieldbutton-quiet-border-radius);
+  &:disabled,
+  &.is-disabled {
+    &:focus-ring {
+      box-shadow: none;
+    }
+  }
+}
+
+.ClearButton {
+  @inherit: %BaseButton;
+  @inherit: %ButtonWithFocusRing;
+
+  inline-size: var(--clearbutton-medium-width);
+  block-size: var(--clearbutton-medium-height);
+
+  border-radius: 100%;
+
+  padding: 0;
+  margin: 0;
+
+  border: none;
+
+  > .Icon {
+    /* @safari10 Workaround for https://bugs.webkit.org/show_bug.cgi?id=169700 */
+    margin-block: 0;
+    margin-inline: auto;
+  }
+}
+
+.ClearButton--overBackground {
+  &:focus-ring {
+    &:after {
+      /* Adjust margin because ClearButton does not have a border */
+      margin: calc(var(--alias-focus-ring-gap) * -1);
+    }
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ClearButton {
+    > .Icon {
+      /* @ie11 Workaround for regression caused by fix for https://bugs.webkit.org/show_bug.cgi?id=169700 */
+      margin: 0;
+    }
+  }
+}
+
+.ClearButton--small {
+  inline-size: var(--clearbutton-small-width);
+  block-size: var(--clearbutton-small-height);
+}

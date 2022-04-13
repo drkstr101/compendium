@@ -1,0 +1,100 @@
+:root {
+  /* todo: fix this in DNA */
+  --colorwheel-focus-ring-size: var(--global-dimension-static-size-25);
+  --colorwheel-border-radius: 100%;
+  --colorwheel-width: calc(var(--global-dimension-size-125) * 16);
+  --colorwheel-height: var(--colorwheel-width);
+}
+
+%ColorControl-handle--focused {
+  /* Bigger handle when focused */
+  width: calc(var(--colorhandle-size) * 2);
+  height: calc(var(--colorhandle-size) * 2);
+
+  margin-left: calc(-1 * var(--colorhandle-size));
+  margin-top: calc(-1 * var(--colorhandle-size));
+}
+
+/** index.css (scale dependent) */
+
+%ColorControl-hiddenField {
+  opacity: 0.0001;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.ColorWheel {
+  position: relative;
+  display: block;
+  width: var(--colorwheel-width);
+  height: var(--colorwheel-height);
+  /* expose to JS */
+  --colorwheel-track-thickness: var(--colorwheel-track-width);
+
+  border-radius: var(--colorwheel-border-radius);
+
+  user-select: none;
+  touch-action: none;
+  cursor: default;
+
+  .ColorWheel-handle {
+    margin: 0;
+  }
+
+  &.is-focused {
+    z-index: 2;
+
+    .ColorWheel-handle {
+      @extend %ColorControl-handle--focused;
+    }
+  }
+
+  &.is-disabled {
+    pointer-events: none;
+  }
+
+  &.is-dragged {
+    /* Be on top when dragging so loupe can overlap */
+    z-index: 2;
+  }
+}
+
+.ColorWheel-gradient {
+  position: relative;
+  z-index: 0;
+  width: var(--colorwheel-width);
+  height: var(--colorwheel-height);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    border-radius: 100%;
+    border-width: var(--colorwheel-border-size);
+    border-style: solid;
+  }
+
+  &:before {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  &:after {
+    top: calc(var(--colorwheel-track-width) - var(--colorwheel-border-size));
+    left: calc(var(--colorwheel-track-width) - var(--colorwheel-border-size));
+    bottom: calc(var(--colorwheel-track-width) - var(--colorwheel-border-size));
+    right: calc(var(--colorwheel-track-width) - var(--colorwheel-border-size));
+  }
+}
+
+.ColorWheel-slider {
+  @extend %ColorControl-hiddenField;
+}

@@ -1,0 +1,166 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --tableform-border-spacing: 0 var(--global-dimension-size-300);
+  --tableform-margin: calc(var(--global-dimension-size-250) * -1) 0;
+  --fieldlabel-margin: var(--global-dimension-size-100);
+}
+
+.FieldLabel {
+  display: flex;
+  flex: 0 0 auto;
+
+  box-sizing: border-box;
+
+  padding: var(--fieldlabel-padding-top) 0 var(--fieldlabel-padding-bottom);
+
+  font-size: var(--fieldlabel-text-size);
+  font-weight: var(--fieldlabel-text-font-weight);
+  line-height: var(--fieldlabel-text-line-height);
+
+  vertical-align: top;
+
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  font-smoothing: subpixel-antialiased;
+  text-align: start;
+
+  cursor: default; /* match native labels even if not using a <label> element */
+}
+
+.FieldLabel--positionSide {
+  display: inline-flex;
+  padding-top: var(--fieldlabel-side-padding-top);
+  padding-inline-end: var(--fieldlabel-side-padding-x);
+}
+
+.FieldLabel-requiredIcon {
+  margin-top: var(--fieldlabel-asterisk-margin-y);
+  margin-inline-end: 0;
+  margin-bottom: 0;
+  margin-inline-start: var(--fieldlabel-asterisk-gap);
+}
+
+.FieldLabel--alignEnd {
+  justify-content: flex-end; /* labelPosition=top case */
+  text-align: end; /* labelPosition=side case */
+}
+
+/* A Field is a wrapper for a FieldLabel, a field component (e.g. textfield), and a HelpText.
+ * By default, labels are placed above the field. Fields have a default width, and the
+ * label will wrap within this width. The width of the whole field can be overridden by the user,
+ * and this causes both the label and inner field to resize as well. */
+.Field {
+  --field-default-width: var(--component-single-line-width);
+
+  &.Field--positionTop {
+    display: inline-flex;
+    flex-direction: column;
+    width: var(--field-default-width);
+
+    .Field-field {
+      /* If the user overrides the width of the field, propagate to the inner component */
+      width: 100%;
+    }
+
+    .Field-field--multiline {
+      flex: 1 1 auto;
+    }
+  }
+
+  /* The side label variant of Field is inline, and fills as much space as needed
+   * by default. If an explicit width is set, then the field flexes to fill available space. */
+  &.Field--positionSide {
+    display: inline-flex;
+    align-items: flex-start;
+
+    /* Wraps the field & help text, but not the label */
+    .Field-wrapper {
+      flex: 1;
+      /* Setting `flex: 1;` is equivalent to `flex: 1 1 0;`, which means we expect to be able to shrink
+       * To be able to shrink, we must have a min-width that isn't 'auto' */
+      min-width: 0;
+      /* TODO: By default, vertical flex wrapper for `labelPosition: side` should have default field width.
+       * This is a workaround until we find a better way to set the width of the field & help text.
+       * Should default to form field's default width and and allow users to override with custom width. */
+      width: var(--field-default-width);
+
+      .Field-field {
+        /* If the user overrides the width of the field, propagate to the inner component */
+        width: 100%;
+      }
+    }
+
+    .Field-field {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .Field-field--multiline {
+      height: 100%;
+    }
+  }
+}
+
+/* topdoc
+{{ form/index.yml }}
+*/
+
+.Form {
+  /* With labelPosition=side, we override field layout to use a CSS table
+   * so that all the labels and fields line up automatically. */
+  &.Form--positionSide {
+    display: table;
+    border-collapse: separate;
+    border-spacing: var(--tableform-border-spacing);
+    margin: var(--tableform-margin);
+    text-align: start;
+
+    .Field {
+      display: table-row;
+      width: 100%;
+    }
+
+    .FieldLabel {
+      display: table-cell;
+    }
+
+    .Field-wrapper {
+      width: 100%;
+    }
+
+    .Field-field {
+      display: table-cell;
+      width: auto;
+      min-width: var(--component-single-line-width);
+    }
+  }
+
+  /* With labelPosition=top, we use a normal flex stack */
+  &.Form--positionTop {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-width: var(--component-single-line-width);
+
+    /* Users may want to make multiple fields appear next to each other.
+     * We want to ensure that all items inside the form get the proper
+     * margin and widths applied, even if wrapped in extra divs for example. */
+    > * {
+      margin-top: var(--fieldlabel-margin);
+      width: 100%;
+    }
+  }
+}

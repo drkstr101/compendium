@@ -1,0 +1,235 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.Table-headWrapper {
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.Table-headCell {
+  color: var(--table-header-text-color);
+  background-color: var(--alias-background-color-default);
+
+  &.is-sortable {
+    .Table-sortedIcon {
+      color: var(--table-header-sort-icon-color);
+    }
+
+    &.is-hovered {
+      color: var(--table-header-text-color-hover);
+
+      .Table-sortedIcon {
+        color: var(--table-header-sort-icon-color-hover);
+      }
+    }
+
+    &:focus-ring,
+    &.is-focused {
+      color: var(--table-header-text-color-key-focus);
+
+      .Table-sortedIcon {
+        color: var(--table-header-sort-icon-color-key-focus);
+      }
+    }
+
+    &:active {
+      color: var(--table-header-text-color-down);
+
+      .Table-sortedIcon {
+        color: var(--table-header-sort-icon-color-down);
+      }
+    }
+  }
+}
+
+/* Helper for shared drop target overlay */
+%drop-target {
+  border-color: var(--alias-border-color-focus);
+  box-shadow: 0 0 0 1px var(--alias-border-color-focus);
+
+  &::before {
+    background-color: var(--alias-highlight-selected);
+  }
+}
+
+.Table-cell,
+.Table-headCell {
+  &:focus-ring,
+  &.is-focused {
+    &::before {
+      box-shadow: inset 0 0 0 2px var(--table-cell-border-color-key-focus);
+    }
+  }
+}
+
+.Table-body {
+  border-style: solid;
+  border-color: var(--table-border-color);
+  background-color: var(--table-background-color);
+
+  &.is-drop-target {
+    border-color: var(--alias-border-color-focus);
+    box-shadow: 0 0 0 1px var(--alias-border-color-focus);
+
+    &::before {
+      background-color: var(--alias-highlight-selected);
+    }
+  }
+}
+
+/* The tbody tag doesn't allow setting a border-radius, so these hacks are to make that work
+   by putting the border on the individual cells instead. */
+tbody.Table-body {
+  border: none;
+
+  .Table-row {
+    border-top: none;
+  }
+
+  .Table-cell {
+    border-top: 1px solid var(--table-cell-border-color);
+  }
+
+  .Table-row .Table-cell:first-child {
+    border-left: 1px solid var(--table-cell-border-color);
+  }
+
+  .Table-row .Table-cell:last-child {
+    border-right: 1px solid var(--table-cell-border-color);
+  }
+
+  .Table-row:last-child .Table-cell {
+    border-bottom: 1px solid var(--table-cell-border-color);
+  }
+}
+
+.Table-row {
+  border-bottom: 1px solid var(--table-cell-border-color);
+  box-sizing: border-box;
+
+  .Table-cellWrapper {
+    /* Add an opaque background so that the transparent background
+     * on the cell doesn't allow other cells to show through sticky cells. */
+    background-color: var(--table-background-color);
+  }
+
+  /* We apply background color to the cell rather than the row so that
+   * cells can overlap (e.g. sticky row headers). */
+  &.is-hovered .Table-cell {
+    background-color: var(--table-row-background-color-hover);
+  }
+
+  &:focus-ring .Table-cell,
+  &.is-focused .Table-cell {
+    background-color: var(--table-row-background-color-hover);
+  }
+
+  &:focus-ring {
+    &:before {
+      background: var(--selectlist-option-focus-indicator-color);
+    }
+  }
+
+  &.is-active .Table-cell:not(.is-disabled) {
+    background-color: var(--table-row-background-color-down);
+  }
+
+  &.is-selected {
+    .Table-cell {
+      background-color: var(--table-row-background-color-selected);
+    }
+
+    &.is-hovered .Table-cell {
+      background-color: var(--table-row-background-color-selected-hover);
+    }
+
+    &:focus-ring .Table-cell,
+    &.is-focused .Table-cell {
+      background-color: var(--table-row-background-color-selected-key-focus);
+    }
+  }
+
+  &.is-drop-target {
+    &::before {
+      box-shadow: inset 0 0 0 2px var(--alias-border-color-focus);
+      background-color: var(--alias-highlight-selected);
+    }
+  }
+}
+
+.Table-cell {
+  color: var(--table-cell-text-color);
+  background-color: var(--table-cell-background-color);
+}
+
+.Table-cell--divider {
+  border-inline-end-style: solid;
+  border-inline-end-color: var(--table-divider-border-color);
+}
+
+.Table--quiet {
+  .Table-body {
+    border-width: 1px 0;
+    background-color: var(--table-quiet-cell-background-color);
+
+    &.is-drop-target {
+      box-shadow: none;
+      border-color: transparent;
+
+      &::before {
+        box-shadow: inset 0 0 0 2px var(--alias-border-color-focus);
+      }
+    }
+  }
+
+  .Table-row {
+    .Table-cellWrapper {
+      background-color: var(--alias-background-color-default);
+    }
+
+    &.is-hovered .Table-cell {
+      background-color: var(--table-quiet-row-background-color-hover);
+    }
+
+    &:focus-ring .Table-cell,
+    &.is-focused .Table-cell {
+      background-color: var(--table-quiet-row-background-color-hover);
+    }
+
+    &.is-active .Table-cell:not(.is-disabled) {
+      background-color: var(--table-quiet-row-background-color-down);
+    }
+
+    &.is-selected {
+      .Table-cell {
+        background-color: var(--table-quiet-row-background-color-selected);
+      }
+
+      &.is-hovered .Table-cell {
+        background-color: var(--table-quiet-row-background-color-selected-hover);
+      }
+
+      &:focus-ring .Table-cell,
+      &.is-focused .Table-cell {
+        background-color: var(--table-quiet-row-background-color-selected-key-focus);
+      }
+    }
+  }
+
+  tbody.Table-body {
+    .Table-row .Table-cell:first-child,
+    .Table-row .Table-cell:last-child {
+      border-left: none;
+      border-right: none;
+    }
+  }
+}

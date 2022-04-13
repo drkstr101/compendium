@@ -1,0 +1,107 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+/* A solid star */
+%Rating-filledStar {
+  .Rating-starActive {
+    display: block;
+  }
+  .Rating-starInactive {
+    display: none;
+  }
+}
+
+/* A star with an outline only */
+%Rating-strokedStar {
+  .Rating-starActive {
+    display: none;
+  }
+  .Rating-starInactive {
+    display: block;
+  }
+}
+
+.Rating {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+
+  width: calc(var(--rating-icon-width) * var(--rating-icon-count));
+
+  border-radius: var(--rating-border-radius);
+
+  cursor: default;
+
+  &.is-disabled,
+  &.is-readOnly {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* When the entire component is hovered, show all solid icons */
+  &:hover {
+    .Rating-icon {
+      @extend %Rating-filledStar;
+    }
+  }
+}
+
+.Rating-input {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0.0001;
+  pointer-events: none;
+}
+
+.Rating-icon {
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: var(--rating-icon-width);
+  height: var(--icon-star-height);
+  padding: var(--rating-icon-padding-y) 0;
+
+  @extend %Rating-strokedStar;
+
+  &.is-selected {
+    @extend %Rating-filledStar;
+  }
+
+  &.is-currentValue {
+    &:after {
+      border-radius: var(--rating-indicator-border-radius);
+      content: '';
+      height: var(--rating-indicator-height);
+      position: absolute;
+      bottom: var(--rating-indicator-offset);
+      left: calc((var(--rating-icon-width) - var(--rating-indicator-width)) / 2);
+      right: calc((var(--rating-icon-width) - var(--rating-indicator-width)) / 2);
+    }
+  }
+
+  /* All stars following the hovered star */
+  &:hover ~ .Rating-icon {
+    @extend %Rating-strokedStar;
+  }
+}
+
+.Rating-starActive,
+.Rating-starInactive {
+  width: var(--icon-star-width);
+  height: var(--icon-star-width);
+  margin: 0 auto;
+}

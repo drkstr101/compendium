@@ -1,0 +1,29 @@
+:root {
+  /* todo: fix this in DNA */
+  --colorwheel-border-color: var(--colorarea-border-color);
+}
+
+.ColorWheel {
+  &.is-disabled {
+    .ColorWheel-gradient {
+      background: var(--colorwheel-fill-color-disabled) !important;
+
+      &:before,
+      &:after {
+        border-color: var(--colorwheel-border-color-disabled);
+      }
+    }
+
+    /* hide all the little colored bits */
+    .ColorWheel-segment {
+      display: none;
+    }
+  }
+}
+
+.ColorWheel-gradient {
+  &:before,
+  &:after {
+    border-color: var(--colorwheel-border-color);
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "root": "libs/theme/styles",
+  "sourceRoot": "libs/theme/styles/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/theme/styles",
+        "tsConfig": "libs/theme/styles/tsconfig.lib.json",
+        "project": "libs/theme/styles/package.json",
+        "entryFile": "libs/theme/styles/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/theme/styles/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/theme/styles/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/theme/styles"],
+      "options": {
+        "jestConfig": "libs/theme/styles/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

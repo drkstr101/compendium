@@ -1,0 +1,147 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+@import 'animation.css';
+
+.CoachMarkPopover {
+  position: relative;
+
+  min-width: var(--coachmark-min-width);
+  max-width: var(--coachmark-max-width);
+
+  border-radius: var(--coachmark-border-radius);
+  border-width: var(--coachmark-border-size);
+  border-style: solid;
+}
+.CoachMarkPopover-image {
+  border-radius: var(--coachmark-border-radius) var(--coachmark-border-radius) 0 0;
+
+  width: 100%;
+}
+
+.CoachMarkPopover-header,
+.CoachMarkPopover-content,
+.CoachMarkPopover-footer {
+  padding: 0 var(--coachmark-padding-x);
+}
+
+.CoachMarkPopover-header {
+  padding-top: var(--coachmark-padding-y);
+}
+
+.CoachMarkPopover-footer {
+  padding-bottom: var(--coachmark-padding-y);
+}
+
+.CoachMarkPopover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--coachmark-title-margin-bottom);
+}
+
+.CoachMarkPopover-title {
+  font-size: var(--coachmark-title-text-size);
+  font-weight: var(--coachmark-title-text-font-weight);
+  line-height: var(--coachmark-title-text-line-height);
+  margin-bottom: 0;
+}
+
+.CoachMarkPopover-step {
+  align-self: start;
+
+  font-size: var(--coachmark-step-text-size);
+  font-weight: var(--coachmark-step-text-font-weight);
+  line-height: var(--coachmark-step-text-line-height);
+  white-space: nowrap;
+}
+
+.CoachMarkPopover-content {
+  margin-bottom: var(--coachmark-content-margin-bottom);
+}
+
+.CoachMarkPopover-footer {
+  margin-top: 0;
+  text-align: right;
+}
+
+.CoachMarkIndicator {
+  position: relative;
+
+  margin: var(--coachmark-indicator-gap);
+}
+
+.CoachMarkIndicator-ring {
+  display: block;
+  position: absolute;
+
+  border-style: solid;
+  border-width: var(--coachmark-indicator-ring-border-size);
+  border-radius: 50%;
+
+  &:nth-child(2) {
+    animation-delay: calc(
+      var(--coachmark-animation-indicator-ring-duration) *
+        var(--coachmark-animation-inticator-ring-center-delay-multiple)
+    );
+  }
+
+  &:nth-child(3) {
+    animation-delay: calc(
+      var(--coachmark-animation-indicator-ring-duration) *
+        var(--coachmark-animation-inticator-ring-outer-delay-multiple)
+    );
+  }
+}
+
+.CoachMarkIndicator {
+  min-width: calc(var(--coachmark-indicator-ring-diameter) * 3);
+  min-height: calc(var(--coachmark-indicator-ring-diameter) * 3);
+}
+
+.CoachMarkIndicator-ring {
+  top: calc(var(--coachmark-indicator-ring-diameter) * 0.75);
+  left: calc(var(--coachmark-indicator-ring-diameter) * 0.75);
+
+  width: var(--coachmark-indicator-ring-diameter);
+  height: var(--coachmark-indicator-ring-diameter);
+  animation: pulse var(--coachmark-animation-indicator-ring-duration) linear infinite;
+
+  &:nth-child(1) {
+    animation-delay: calc(
+      var(--coachmark-animation-indicator-ring-duration) *
+        var(--coachmark-animation-inticator-ring-inner-delay-multiple)
+    );
+  }
+}
+
+.CoachMarkIndicator--quiet {
+  min-width: calc(var(--coachmark-quiet-indicator-ring-diameter) * 2.75);
+  min-height: calc(var(--coachmark-quiet-indicator-ring-diameter) * 2.75);
+
+  .CoachMarkIndicator-ring {
+    top: calc(var(--coachmark-quiet-indicator-ring-diameter) * 0.75);
+    left: calc(var(--coachmark-quiet-indicator-ring-diameter) * 0.75);
+
+    width: var(--coachmark-quiet-indicator-ring-diameter);
+    height: var(--coachmark-quiet-indicator-ring-diameter);
+    animation: pulse--quiet var(--coachmark-animation-indicator-ring-duration) linear infinite;
+
+    &:nth-child(1) {
+      animation-delay: calc(
+        var(--coachmark-animation-indicator-ring-duration) *
+          var(--coachmark-quiet-animation-inticator-ring-inner-delay-multiple)
+      );
+    }
+  }
+}

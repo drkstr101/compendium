@@ -1,0 +1,63 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.BarLoader {
+  .BarLoader-fill {
+    background: var(--barloader-large-track-fill-color);
+  }
+
+  .BarLoader-track {
+    background-color: var(--barloader-large-track-color);
+  }
+
+  &.BarLoader--overBackground {
+    .BarLoader-fill {
+      background: var(--barloader-large-over-background-track-fill-color);
+    }
+
+    .BarLoader-label,
+    .BarLoader-percentage {
+      color: var(--barloader-large-over-background-track-fill-color);
+    }
+
+    .BarLoader-track {
+      background-color: var(--barloader-large-over-background-track-color);
+    }
+  }
+  &.is-positive {
+    .BarLoader-fill {
+      background: var(--meter-large-track-color-positive);
+    }
+  }
+  &.is-warning {
+    .BarLoader-fill {
+      background: var(--meter-large-track-color-warning);
+    }
+  }
+  &.is-critical {
+    .BarLoader-fill {
+      background: var(--meter-large-track-color-critical);
+    }
+  }
+}
+.BarLoader-label,
+.BarLoader-percentage {
+  color: var(--fieldlabel-text-color);
+}
+.BarLoader-label,
+.BarLoader-percentage {
+  color: var(--fieldlabel-text-color);
+}
+.BarLoader-label,
+.BarLoader-percentage {
+  color: var(--fieldlabel-text-color);
+}

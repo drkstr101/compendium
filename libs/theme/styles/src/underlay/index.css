@@ -1,0 +1,53 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+@import '~@compendium/theme.styles.overlay';
+
+:root {
+  /* Bug: this must be 0ms, not 0 */
+  --dialog-background-entry-animation-delay: 0ms;
+  --dialog-background-exit-animation-ease: cubic-bezier(0.5, 0, 1, 1); /* wrong in DNA */
+  --dialog-background-entry-animation-ease: cubic-bezier(0, 0, 0.4, 1); /* wrong in DNA */
+}
+
+.Underlay {
+  @inherit: %overlay;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Float above things by default */
+  z-index: 1;
+
+  overflow: hidden;
+
+  /* Exit animations */
+  transition: opacity var(--dialog-background-exit-animation-duration)
+      var(--dialog-background-exit-animation-ease) var(--dialog-background-exit-animation-delay),
+    visibility 0ms linear
+      calc(
+        var(--dialog-background-exit-animation-delay) +
+          var(--dialog-background-exit-animation-duration)
+      );
+}
+
+.Underlay.is-open {
+  @inherit: %overlay--open;
+
+  /* Entry animations */
+  transition: opacity var(--dialog-background-entry-animation-duration)
+    var(--dialog-background-entry-animation-ease) var(--dialog-background-entry-animation-delay);
+}

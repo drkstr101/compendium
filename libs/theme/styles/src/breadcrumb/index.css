@@ -1,0 +1,175 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+.Breadcrumbs {
+  display: flex;
+  justify-content: start;
+  list-style-type: none;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.Breadcrumbs-itemSeparator {
+  position: relative;
+
+  /* Fix alignment, it's not quite centered */
+  top: var(--global-dimension-size-10);
+
+  width: var(--breadcrumb-ui-icon-width);
+  height: var(--breadcrumb-ui-icon-height);
+
+  transform: scale(1);
+
+  opacity: 1;
+
+  &.is-reversed {
+    transform: scale(-1);
+  }
+}
+
+.Breadcrumbs-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: start;
+
+  box-sizing: border-box;
+  height: var(--breadcrumb-list-height);
+
+  position: relative;
+
+  white-space: nowrap;
+  font-size: var(--breadcrumb-item-text-size);
+  font-weight: var(--breadcrumb-item-text-font-weight);
+  line-height: var(--breadcrumb-item-text-line-height);
+
+  &:last-of-type {
+    font-weight: var(--breadcrumb-title-text-font-weight);
+
+    .Breadcrumbs-itemSeparator {
+      display: none;
+    }
+  }
+
+  > .ActionButton {
+    margin-inline-end: var(--breadcrumb-button-gap);
+  }
+
+  /* last breadcrumb should truncate with an ellipsis */
+  &:last-child {
+    overflow: hidden;
+    .Breadcrumbs-itemLink {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.Breadcrumbs-itemLink {
+  cursor: default;
+  position: relative;
+
+  line-height: var(--breadcrumb-list-height);
+  vertical-align: middle;
+
+  padding: 0 var(--breadcrumb-item-padding-x);
+  height: var(--breadcrumb-list-height);
+
+  margin-inline-end: var(--breadcrumb-item-margin-right);
+
+  border-radius: var(--breadcrumb-item-border-radius);
+
+  outline: none;
+
+  text-decoration: none;
+  /* override webkit and user agent h1 */
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: inherit;
+
+  &[href],
+  &[tabindex='0'] {
+    cursor: pointer;
+
+    &:hover,
+    &:focus-ring {
+      text-decoration: underline;
+    }
+  }
+}
+
+.Breadcrumbs-item.is-dragged .Breadcrumbs-itemLink:before,
+.Breadcrumbs-itemLink:focus-ring:before {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  border-width: var(--breadcrumb-item-border-size-key-focus);
+  border-style: solid;
+  border-radius: var(--breadcrumb-item-border-radius);
+
+  content: '';
+  pointer-events: none;
+}
+
+.Breadcrumbs--small {
+  .Breadcrumbs-item {
+    font-size: var(--breadcrumb-multiline-item-text-size);
+  }
+}
+
+.Breadcrumbs--medium {
+  .Breadcrumbs-item {
+    font-size: var(--breadcrumb-compact-item-text-size);
+  }
+}
+
+.Breadcrumbs--multiline {
+  flex-wrap: wrap;
+
+  .Breadcrumbs-item {
+    &:last-of-type {
+      height: auto;
+
+      flex: 0 1 100%;
+
+      margin-top: var(--breadcrumb-multiline-title-margin-top);
+
+      font-size: var(--breadcrumb-multiline-title-text-size);
+      font-weight: var(--breadcrumb-multiline-title-text-font-weight);
+      line-height: var(--breadcrumb-multiline-title-text-line-height);
+
+      .Breadcrumbs-itemLink {
+        height: auto;
+        text-decoration: none;
+      }
+    }
+
+    .Heading--pageTitle {
+      margin: 0;
+
+      font-size: inherit;
+      font-weight: inherit;
+    }
+  }
+}

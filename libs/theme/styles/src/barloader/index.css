@@ -1,0 +1,137 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+.BarLoader {
+  position: relative;
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  min-inline-size: var(--global-dimension-static-size-600);
+  inline-size: var(--barloader-large-width);
+  vertical-align: top;
+  isolation: isolate;
+
+  &.BarLoader--indeterminate {
+    max-inline-size: var(--barloader-large-width);
+  }
+
+  &.BarLoader--indeterminate.BarLoader--sideLabel {
+    .BarLoader-track {
+      max-inline-size: var(--barloader-large-width);
+      inline-size: 100%;
+    }
+  }
+}
+
+.BarLoader-track {
+  /* Visually apply border radius to child elements */
+  overflow: hidden;
+  min-inline-size: var(--global-dimension-static-size-600);
+  inline-size: 100%;
+  height: var(--barloader-large-height);
+  border-radius: var(--barloader-large-border-radius);
+  z-index: 1; /* to fix a weird webkit bug with rounded corners and masking */
+}
+
+.BarLoader-fill {
+  border: none;
+  height: var(--barloader-large-height);
+
+  transition: width 1s;
+}
+
+.BarLoader-label,
+.BarLoader-percentage {
+  font-size: var(--fieldlabel-text-size);
+  font-weight: var(--fieldlabel-text-font-weight);
+  line-height: var(--fieldlabel-text-line-height);
+  text-align: start;
+  margin-bottom: var(--barloader-large-label-gap-y);
+}
+
+.BarLoader-label {
+  flex: 1 1 0%;
+}
+
+.BarLoader-percentage {
+  align-self: flex-start;
+  margin-inline-start: var(--barloader-small-label-gap-x);
+}
+
+.BarLoader--sideLabel {
+  display: inline-flex;
+  flex-flow: row;
+  justify-content: space-between;
+  min-inline-size: fit-content;
+
+  .BarLoader-track {
+    inline-size: inherit;
+  }
+
+  .BarLoader-label {
+    margin-inline-end: var(--barloader-large-label-gap-x);
+    margin-bottom: 0;
+  }
+  .BarLoader-percentage {
+    order: 3;
+    text-align: end;
+    margin-inline-start: var(--barloader-large-label-gap-x);
+    margin-bottom: 0;
+  }
+}
+
+.BarLoader--small {
+  min-inline-size: var(--global-dimension-static-size-600);
+
+  .BarLoader-fill {
+    height: var(--barloader-small-height);
+  }
+
+  .BarLoader-track {
+    height: var(--barloader-small-height);
+    border-radius: var(--barloader-small-border-radius);
+  }
+}
+.BarLoader--indeterminate .BarLoader-fill {
+  inline-size: var(--barloader-large-indeterminate-fill-width);
+  position: relative;
+  animation-timing-function: var(--barloader-large-indeterminate-animation-ease);
+  will-change: transform;
+}
+
+[dir='ltr'] .BarLoader--indeterminate .BarLoader-fill {
+  animation: indeterminate-loop-ltr var(--barloader-large-indeterminate-duration) infinite;
+}
+[dir='rtl'] .BarLoader--indeterminate .BarLoader-fill {
+  animation: indeterminate-loop-rtl var(--barloader-large-indeterminate-duration) infinite;
+}
+
+@keyframes indeterminate-loop-ltr {
+  from {
+    transform: translate(calc(var(--barloader-large-indeterminate-fill-width) * -1));
+  }
+  to {
+    transform: translate(var(--barloader-large-width));
+  }
+}
+
+@keyframes indeterminate-loop-rtl {
+  from {
+    transform: translate(var(--barloader-large-width));
+  }
+  to {
+    transform: translate(calc(var(--barloader-large-width) * -1));
+  }
+}

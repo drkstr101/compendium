@@ -1,0 +1,64 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.DropIndicator {
+  position: relative;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: var(--dropindicator-circle-size);
+    height: var(--dropindicator-circle-size);
+    border-radius: 50%;
+    border: var(--dropindicator-border-size) solid;
+    box-sizing: border-box;
+  }
+}
+
+.DropIndicator--horizontal {
+  height: var(--dropindicator-border-size);
+  margin: 0 var(--dropindicator-circle-size);
+
+  &:before,
+  &:after {
+    top: calc(var(--dropindicator-circle-size) * -1 / 2 + var(--dropindicator-border-size) / 2);
+  }
+
+  &:before {
+    left: calc(var(--dropindicator-circle-size) * -1);
+  }
+
+  &:after {
+    right: calc(var(--dropindicator-circle-size) * -1);
+  }
+}
+
+.DropIndicator--vertical {
+  width: var(--dropindicator-border-size);
+  margin: var(--dropindicator-circle-size) 0;
+
+  &:before,
+  &:after {
+    left: calc(
+      var(--dropindicator-circle-size) * -1 / 2 + var(--dropindicator-border-size) / 2
+    );
+  }
+
+  &:before {
+    top: calc(var(--dropindicator-circle-size) * -1);
+  }
+
+  &:after {
+    bottom: calc(var(--dropindicator-circle-size) * -1);
+  }
+}

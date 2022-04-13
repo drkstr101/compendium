@@ -1,0 +1,70 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+.SplitView-pane {
+  background-color: var(--rail-content-background-color);
+}
+
+.SplitView-splitter {
+  background-color: var(--rail-handle-background-color);
+}
+
+.SplitView-gripper {
+  border-color: var(--rail-handle-background-color);
+  &:before {
+    background-color: var(--rail-handle-background-color);
+  }
+}
+
+.SplitView-splitter {
+  &.is-draggable {
+    &:hover,
+    &.is-hovered {
+      background-color: var(--rail-handle-background-color-hover);
+
+      .SplitView-gripper {
+        border-color: var(--rail-handle-background-color-hover);
+        &:before {
+          background-color: var(--rail-handle-background-color-hover);
+        }
+      }
+    }
+
+    &:active,
+    &.is-active {
+      background-color: var(--rail-handle-background-color-down);
+
+      .SplitView-gripper {
+        border-color: var(--rail-handle-background-color-down);
+        &:before {
+          background-color: var(--rail-handle-background-color-down);
+        }
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-ring {
+      background-color: var(--alias-focus-color);
+
+      .SplitView-gripper {
+        border-color: var(--alias-focus-color);
+        box-shadow: 0 0 0 1px var(--alias-focus-color);
+        &:before {
+          background-color: var(--alias-focus-color);
+        }
+      }
+    }
+  }
+}

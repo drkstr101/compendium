@@ -1,0 +1,272 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  /* The width of a step */
+  --steplist-step-width: 80px;
+
+  /* The diameter of the marker */
+  --steplist-marker-diameter: 8px;
+
+  /* The width of the hit area */
+  --steplist-marker-hitArea: 20px;
+
+  /* The height of the line */
+  --steplist-segment-height: 2px;
+
+  /* This gives enough space for one line of text */
+  --steplist-topPadding: 22px;
+  --steplist-small-topPadding: 11px;
+
+  /* This gives enough space for the longest possible label */
+  --steplist-sidePadding: 60px;
+
+  /* Offset from the BOTTOM of the steplist */
+  --steplist-label-labelOffset: 10px;
+
+  /* Font size of the label */
+  --steplist-label-text-size: 12px;
+}
+
+.Steplist {
+  /* Contain child elements with positive z-index */
+  z-index: 0;
+  position: relative;
+
+  display: block;
+  vertical-align: top;
+  margin: 0;
+  padding-top: var(--steplist-topPadding);
+  padding-left: var(--steplist-sidePadding);
+  padding-right: var(--steplist-sidePadding);
+
+  text-align: center;
+  white-space: nowrap;
+  font-size: 0; /* To remove html whitespace between inline elements */
+  line-height: 16px; /* in case the container changes it */
+}
+
+.Steplist--interactive {
+  .Steplist-label,
+  .Steplist-markerContainer {
+    /* Show cursor on hit zone when clickable */
+    cursor: pointer;
+  }
+}
+
+/* Small (w/o label or tooltip) */
+.Steplist--small {
+  padding: var(--steplist-small-topPadding) 0;
+
+  .Steplist-item {
+    padding: 0 40px 0 0;
+    width: 80px;
+
+    /* Disable Label */
+    .Steplist-label {
+      display: none;
+    }
+
+    &:first-child,
+    &:last-child {
+      width: 20px;
+    }
+
+    /* Disable first line */
+    &:first-child {
+      .Steplist-markerContainer {
+        margin-left: -10px;
+      }
+    }
+
+    &:last-child {
+      .Steplist-markerContainer {
+        margin-right: -10px;
+      }
+    }
+  }
+}
+
+.Steplist-item {
+  outline: none;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+
+  /* Don't let tooltips mess up alignment */
+  vertical-align: bottom;
+
+  box-sizing: content-box;
+  width: var(--steplist-step-width);
+  padding: 0 calc(var(--steplist-step-width) / 2) 0 0;
+
+  /* Completed State */
+  &.is-complete {
+    .Steplist-marker {
+      border: none;
+    }
+
+    /* The next step's line should be solid */
+    & + .Steplist-item .Steplist-segment {
+      border-bottom-width: var(--steplist-segment-height);
+      border-bottom-style: solid;
+    }
+  }
+
+  /* Selected state */
+  &.is-selected {
+    /* Focus */
+    &:focus,
+    &.is-focused,
+    *:focus {
+      outline: none;
+    }
+    .Steplist-marker {
+      border: none;
+    }
+  }
+}
+
+.Steplist-label {
+  position: absolute;
+  left: 50%;
+  bottom: var(--steplist-label-labelOffset);
+
+  display: block;
+  width: calc(var(--steplist-step-width) * 1.5);
+
+  font-size: var(--steplist-label-text-size);
+  white-space: normal;
+
+  transform: translateX(-50%);
+}
+
+.Steplist-markerContainer {
+  display: block;
+
+  z-index: 2;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+
+  width: var(--steplist-marker-hitArea);
+  height: var(--steplist-marker-hitArea);
+
+  margin-left: calc(calc(var(--steplist-marker-hitArea) / 2) * -1);
+}
+
+/* Circle step marker */
+.Steplist-marker {
+  box-sizing: border-box; /* So we can stroke nicely */
+  display: block;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: calc(calc(var(--steplist-marker-diameter) / 2) * -1);
+  margin-left: calc(calc(var(--steplist-marker-diameter) / 2) * -1);
+
+  width: var(--steplist-marker-diameter);
+  height: var(--steplist-marker-diameter);
+
+  border-radius: var(--steplist-marker-diameter);
+
+  border: 2px solid;
+  border-color: transparent;
+  background: transparent;
+}
+
+/* Step line */
+.Steplist-segment {
+  display: block;
+  z-index: 1;
+  position: absolute;
+  right: calc(var(--steplist-step-width) - calc(var(--steplist-marker-diameter) * 1.5));
+
+  box-sizing: content-box;
+  width: calc(
+    calc(var(--steplist-step-width) * 1.5) - calc(var(--steplist-marker-diameter) * 2)
+  );
+  bottom: calc(calc(var(--steplist-segment-height) / 2) * -1);
+
+  /* Default is dashed */
+  border-bottom-width: var(--steplist-segment-height);
+  border-bottom-style: dashed;
+}
+
+/* First step overrides */
+.Steplist-item:first-child {
+  .Steplist-markerContainer {
+    left: 0;
+  }
+
+  .Steplist-label {
+    left: 0;
+  }
+
+  .Steplist-segment {
+    /* Not visible for first step */
+    display: none;
+  }
+}
+
+/* Last step overrides */
+.Steplist-item:last-child {
+  .Steplist-label {
+    left: auto;
+    right: 0;
+
+    transform: translateX(50%);
+  }
+
+  .Steplist-markerContainer {
+    left: auto;
+    right: 0;
+
+    margin-left: 0;
+    margin-right: calc(calc(var(--steplist-marker-hitArea) / 2) * -1);
+  }
+
+  .Steplist-segment {
+    right: var(--steplist-marker-diameter);
+    left: auto;
+  }
+}
+
+.Steplist-item:first-child,
+.Steplist-item:last-child {
+  width: calc(
+    calc(var(--steplist-step-width) / 2) - calc(var(--steplist-marker-diameter) * 2.5)
+  );
+}
+
+/* Single step */
+.Steplist-item:only-child {
+  .Steplist-label {
+    /* Be centered */
+    left: 50%;
+
+    /* Override last-child bits */
+    transform: translate(-50%);
+  }
+
+  .Steplist-markerContainer {
+    /* Be centered */
+    left: 50%;
+
+    /* Override last-child bits */
+    margin-right: 0;
+    margin-left: calc(calc(var(--steplist-marker-hitArea) / 2) * -1);
+  }
+}

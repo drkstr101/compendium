@@ -1,0 +1,194 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+@import '~@compendium/theme.styles.commons';
+
+:root {
+  --dropdown-popover-max-width: var(--global-dimension-size-3000);
+  --dropdown-width: var(--global-dimension-size-2400);
+}
+
+.Dropdown {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+
+  /* Truncate if menu options make us too wide */
+  max-inline-size: 100%;
+  inline-size: var(--dropdown-width);
+  min-inline-size: var(--dropdown-min-width);
+
+  /* Hack to enable select-powered Dropdowns */
+  select {
+    appearance: none;
+    -ms-appearance: none; /* Edge */
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &::-ms-value {
+      background-color: transparent;
+    }
+
+    & + .Dropdown-chevron {
+      position: absolute;
+      inset-inline-end: var(--dropdown-padding-x);
+      inset-block-start: 50%;
+      margin-block-start: calc(var(--icon-chevron-down-medium-height) / -2);
+    }
+  }
+}
+
+.Dropdown-trigger {
+  position: relative;
+  inline-size: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Ensure that changing the selected item doesn't affect the size of the dropdown and its parents */
+  contain: size;
+}
+
+.Dropdown-label {
+  /* Be the biggest, but also shrink! */
+  flex: 1 1 auto;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  block-size: calc(var(--dropdown-height) - calc(var(--dropdown-border-size) * 2));
+  line-height: calc(var(--dropdown-height) - calc(var(--dropdown-border-size) * 2));
+
+  font-size: var(--dropdown-text-size);
+
+  text-overflow: ellipsis;
+  text-align: start;
+
+  &.is-placeholder {
+    font-weight: var(--dropdown-placeholder-text-font-weight);
+    font-style: var(--dropdown-placeholder-text-font-style);
+    transition: color var(--global-animation-duration-100) ease-in-out;
+  }
+}
+
+/* Only apply margin to the icon if there's a label */
+.Dropdown-label + .Dropdown-chevron {
+  margin-inline-start: var(--dropdown-icon-margin-left);
+}
+
+.Icon + .Dropdown-label {
+  margin-inline-start: var(--selectlist-thumbnail-image-padding-x);
+}
+
+/* Only apply margin if there's a label */
+.Dropdown-label ~ .Dropdown-chevron {
+  margin-inline-start: var(--dropdown-icon-margin-left);
+}
+
+.Dropdown-chevron {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  transition: color var(--global-animation-duration-100) ease-out;
+  flex-shrink: 0;
+
+  /* Fix Safari 10 bug where align-items is ignored inside of buttons */
+  margin-top: calc(
+    calc(
+        var(--dropdown-height) - calc(var(--dropdown-border-size) * 2) -
+          var(--icon-chevron-down-medium-height)
+      ) / 2
+  );
+  margin-bottom: calc(
+    calc(
+        var(--dropdown-height) - calc(var(--dropdown-border-size) * 2) -
+          var(--icon-chevron-down-medium-height)
+      ) / 2
+  );
+
+  opacity: 1;
+}
+
+/* Error icons */
+.Dropdown-trigger {
+  .Dropdown-invalidIcon {
+    /* Fix Safari 10 bug where align-items is ignored inside of buttons */
+    margin-block-start: calc(
+      calc(
+          var(--dropdown-height) - calc(var(--dropdown-border-size) * 2) -
+            var(--dropdown-icon-size)
+        ) / 2
+    );
+    margin-block-end: calc(
+      calc(
+          var(--dropdown-height) - calc(var(--dropdown-border-size) * 2) -
+            var(--dropdown-icon-size)
+        ) / 2
+    );
+  }
+
+  .Dropdown-label + .Dropdown-invalidIcon {
+    margin-inline-start: var(--dropdown-icon-margin-left);
+  }
+}
+
+.Dropdown-trigger {
+  .Dropdown-progressCircle {
+    margin-inline-start: var(--dropdown-icon-margin-left);
+  }
+}
+
+.Icon + .Dropdown-chevron {
+  margin-inline-start: var(--dropdown-icon-gap);
+}
+
+.Dropdown--quiet {
+  inline-size: auto;
+  min-inline-size: var(--dropdown-quiet-min-width);
+
+  .Dropdown-trigger {
+    contain: none;
+  }
+}
+
+.Dropdown-popover--quiet {
+  inline-size: var(--dropdown-width);
+
+  /* Define this var so it can be read from JS */
+  --dropdown-quiet-offset: calc(
+    var(--dropdown-quiet-popover-offset-x) + var(--popover-border-size)
+  );
+  margin-inline-start: calc(var(--dropdown-quiet-offset) * -1);
+}
+
+/* When used with a label or inside a Form, we need to override some things from .Field
+ * so quiet dropdowns still collapse properly. */
+.Field.Dropdown-fieldWrapper--quiet {
+  display: inline-flex;
+  flex-direction: column;
+  inline-size: auto;
+
+  .Dropdown--quiet {
+    inline-size: auto;
+    min-inline-size: var(--dropdown-quiet-min-width);
+
+    .Dropdown-trigger {
+      inline-size: auto;
+    }
+  }
+
+  &.Dropdown-fieldWrapper--positionSide {
+    flex-direction: row;
+  }
+}

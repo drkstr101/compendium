@@ -1,0 +1,84 @@
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+:root {
+  --icon-size-s: var(--alias-workflow-icon-size);
+  --icon-size-m: var(--global-dimension-size-300);
+  --icon-size-xxs: calc(var(--icon-size-s) / 2);
+  --icon-size-xs: calc(var(--icon-size-m) / 2);
+  --icon-size-l: calc(var(--icon-size-s) * 2);
+  --icon-size-xl: calc(var(--icon-size-m) * 2);
+  --icon-size-xxl: calc(var(--icon-size-m) * 3);
+}
+
+.Icon--sizeXXS {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-xxs);
+    inline-size: var(--icon-size-xxs);
+  }
+}
+
+.Icon--sizeXS {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-xs);
+    inline-size: var(--icon-size-xs);
+  }
+}
+
+.Icon--sizeS {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-s);
+    inline-size: var(--icon-size-s);
+  }
+}
+
+.Icon--sizeM {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-m);
+    inline-size: var(--icon-size-m);
+  }
+}
+
+.Icon--sizeL {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-l);
+    inline-size: var(--icon-size-l);
+  }
+}
+
+.Icon--sizeXL {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-xl);
+    inline-size: var(--icon-size-xl);
+  }
+}
+
+.Icon--sizeXXL {
+  &,
+  img,
+  svg {
+    block-size: var(--icon-size-xxl);
+    inline-size: var(--icon-size-xxl);
+  }
+}
