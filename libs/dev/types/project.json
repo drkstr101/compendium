@@ -1,0 +1,25 @@
+{
+  "root": "libs/dev/types",
+  "sourceRoot": "libs/dev/types/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/dev/types",
+        "main": "libs/dev/types/src/index.ts",
+        "tsConfig": "libs/dev/types/tsconfig.lib.json",
+        "assets": ["libs/dev/types/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/dev/types/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

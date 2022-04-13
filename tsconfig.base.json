@@ -20,21 +20,13 @@
       "@compendium/dev.docs.css-module-preview": [
         "libs/dev/docs/css-module-preview/src/index.ts"
       ],
+      "@compendium/dev.types": ["libs/dev/types/src/index.ts"],
       "@compendium/env.spectrum": ["libs/env/spectrum/src/index.ts"],
-      "@compendium/model.types": ["libs/model/types/src/index.ts"],
-      "@compendium/theme.dark-theme": ["libs/theme/dark-theme/src/index.ts"],
-      "@compendium/theme.default-theme": ["libs/theme/default-theme/src/index.ts"],
-      "@compendium/theme.light-theme": ["libs/theme/light-theme/src/index.ts"],
+      "@compendium/theme.composition-theme": ["libs/theme/composition-theme/src/index.ts"],
       "@compendium/theme.provider": ["libs/theme/provider/src/index.ts"],
-      "@compendium/theme.styles.*": ["libs/theme/styles/src/*/index.ts"],
-      "@compendium/theme.types": ["libs/theme/types/src/index.ts"],
+      "@compendium/theme.styles.*": ["libs/theme/styles/*"],
       "@compendium/ui": ["libs/ui/src/index.ts"]
     }
   },
-  "files": [
-    "./libs/typings/cssmodule.d.ts",
-    "./libs/typings/image.d.ts",
-    "./libs/typings/mdx.d.ts"
-  ],
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "dist"]
 }

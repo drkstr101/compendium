@@ -78,6 +78,9 @@
     "libs/content": {
       "defaultScope": "compendium.content"
     },
+    "libs/dev": {
+      "defaultScope": "compendium.dev"
+    },
     "libs/env": {
       "defaultScope": "compendium.env"
     },
@@ -93,6 +96,9 @@
       "defaultScope": "compendium.tools"
     },
 
+    "{docs/css-module-preview}": {
+      "teambit.react/react": {}
+    },
     "{readme}": {
       "teambit.mdx/mdx": {}
     },

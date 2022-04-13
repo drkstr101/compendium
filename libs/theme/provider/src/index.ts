@@ -1,4 +1,18 @@
-export { ProviderContext } from './provider-context';
-export type { ProviderContextType } from './provider-context';
-export { ProviderProvider } from './provider-context-provider';
-export type { ProviderProviderProps } from './provider-context-provider';
+/*
+ * Copyright 2022 Watheia Labs, LLC. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+export { default as ThemeContext } from './provider.context';
+export type { ThemeContextProps, ThemeProviderContextType } from './provider.context';
+export { default as ThemeProvider } from './provider';
+export type { ThemeProviderProps } from './provider';
+export { useColorScheme } from './use-color-scheme';
+export { useScale } from './use-scale';
+export * from './constants';

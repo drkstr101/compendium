@@ -1,0 +1,43 @@
+{
+  "root": "libs/theme/composition-theme",
+  "sourceRoot": "libs/theme/composition-theme/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/theme/composition-theme",
+        "tsConfig": "libs/theme/composition-theme/tsconfig.lib.json",
+        "project": "libs/theme/composition-theme/package.json",
+        "entryFile": "libs/theme/composition-theme/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "assets": [
+          {
+            "glob": "libs/theme/composition-theme/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/theme/composition-theme/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/theme/composition-theme"],
+      "options": {
+        "jestConfig": "libs/theme/composition-theme/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

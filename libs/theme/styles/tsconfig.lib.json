@@ -15,9 +15,9 @@
     "**/*.test.jsx"
   ],
   "files": [
-    "../../typings/cssmodule.d.ts",
-    "../../typings/image.d.ts",
-    "../../typings/mdx.d.ts"
+    "../../dev/types/src/cssmodule.d.ts",
+    "../../dev/types/src/image.d.ts",
+    "../../dev/types/src/mdx.d.ts"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

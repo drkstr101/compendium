@@ -3,15 +3,10 @@
 
 version: '3.7'
 services:
-  gitlab-runner:
-    image: 'gitlab/gitlab-runner:latest'
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./.gitlab/config:/etc/gitlab-runner
-    restart: unless-stopped
-
   dev.local:
     image: 'registry:2'
+    networks:
+      - k3s
     ports:
       - 5000:5000
 
@@ -35,9 +30,11 @@ services:
     volumes:
       - k3s-server:/var/lib/rancher/k3s
       # This is just so that we get the kubeconfig file out
-      - .:/output
-      - ./registries.yaml:/etc/rancher/k3s/registries.yaml
-      - ./config/k3s:/var/lib/rancher/k3s/server/manifests
+      - /etc/rancher/k3s:/output
+      - /etc/rancher/k3s/registries.yaml:/etc/rancher/k3s/registries.yaml
+      - /var/lib/rancher/k3s/server/manifests:/var/lib/rancher/k3s/server/manifests
+    networks:
+      - k3s
     ports:
       - 6443:6443 # Kubernetes API Server
       - 80:80 # Ingress controller port 80
@@ -58,11 +55,22 @@ services:
         hard: 65535
     privileged: true
     restart: always
+    networks:
+      - k3s
     environment:
       - K3S_URL=https://k3s-server:6443
       - K3S_TOKEN=${K3S_TOKEN:?err}
     volumes:
-      - ./registries.yaml:/etc/rancher/k3s/registries.yaml
+      - /etc/rancher/k3s/registries.yaml:/etc/rancher/k3s/registries.yaml
+
+  # whoami:
+  #   image: jwilder/whoami
+  #   networks:
+  #     - www
 
 volumes:
   k3s-server: {}
+
+networks:
+  k3s:
+    external: true

@@ -79,3 +79,6 @@ depgraph: node_modules
 
 spectrum-css:
 	nx workspace-generator spectrum-css theme-styles
+
+copyright-headers:
+	nx workspace-generator copyright-headers

@@ -10,9 +10,9 @@
     "resolveJsonModule": true
   },
   "files": [
-    "../libs/typings/cssmodule.d.ts",
-    "../libs/typings/image.d.ts",
-    "../libs/typings/mdx.d.ts"
+    "../libs/dev/types/src/cssmodule.d.ts",
+    "../libs/dev/types/src/image.d.ts",
+    "../libs/dev/types/src/mdx.d.ts"
   ],
   "include": ["**/*.ts", "**/*.mdx"]
 }

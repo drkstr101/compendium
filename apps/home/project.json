@@ -9,7 +9,19 @@
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/home",
-        "outputPath": "dist/apps/home"
+        "outputPath": "dist/apps/home",
+        "assets": [
+          {
+            "input": "apps/home/Dockerfile",
+            "glob": "LICENSE",
+            "output": "/"
+          },
+          {
+            "input": "",
+            "glob": "LICENSE",
+            "output": "/"
+          }
+        ]
       },
       "configurations": {
         "production": {}

@@ -6,7 +6,7 @@
     "declaration": true,
     "types": ["node"]
   },
-  "files": ["../typings/mdx.d.ts"],
+  "files": ["../dev/types/src/mdx.d.ts"],
   "include": ["**/*.ts", "**/*.d.ts"],
   "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }
