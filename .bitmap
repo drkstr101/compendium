@@ -11,7 +11,7 @@
 {
     "docs/css-module-preview": {
         "scope": "compendium.dev",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "src/index.ts",
         "rootDir": "libs/dev/docs/css-module-preview"
     },
@@ -23,433 +23,433 @@
     },
     "readme": {
         "scope": "compendium.content",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/content/readme/src"
     },
     "spectrum": {
         "scope": "compendium.env",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/env/spectrum/src"
     },
     "styles/accordion": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/accordion"
     },
     "styles/actiongroup": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/actiongroup"
     },
     "styles/actionmenu": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/actionmenu"
     },
     "styles/alert": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/alert"
     },
     "styles/asset": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/asset"
     },
     "styles/assetlist": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/assetlist"
     },
     "styles/avatar": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/avatar"
     },
     "styles/banner": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/banner"
     },
     "styles/barloader": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/barloader"
     },
     "styles/breadcrumb": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/breadcrumb"
     },
     "styles/button": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/button"
     },
     "styles/buttongroup": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/buttongroup"
     },
     "styles/calendar": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/calendar"
     },
     "styles/card": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/card"
     },
     "styles/checkbox": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/checkbox"
     },
     "styles/circleloader": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/circleloader"
     },
     "styles/coachmark": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/coachmark"
     },
     "styles/colorhandle": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/colorhandle"
     },
     "styles/colorloupe": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/colorloupe"
     },
     "styles/colorslider": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/colorslider"
     },
     "styles/colorwheel": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/colorwheel"
     },
     "styles/commons": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.css",
         "rootDir": "libs/theme/styles/src/commons"
     },
     "styles/cyclebutton": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/cyclebutton"
     },
     "styles/dialog": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/dialog"
     },
     "styles/dropdown": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/dropdown"
     },
     "styles/dropindicator": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/dropindicator"
     },
     "styles/dropzone": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/dropzone"
     },
     "styles/fieldgroup": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/fieldgroup"
     },
     "styles/fieldlabel": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/fieldlabel"
     },
     "styles/helptext": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/helptext"
     },
     "styles/icon": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/icon"
     },
     "styles/illustratedmessage": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/illustratedmessage"
     },
     "styles/image": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/image"
     },
     "styles/inputgroup": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/inputgroup"
     },
     "styles/label": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/label"
     },
     "styles/link": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/link"
     },
     "styles/menu": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/menu"
     },
     "styles/miller": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/miller"
     },
     "styles/modal": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/modal"
     },
     "styles/overlay": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.css",
         "rootDir": "libs/theme/styles/src/overlay"
     },
     "styles/page": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/page"
     },
     "styles/pagination": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/pagination"
     },
     "styles/popover": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/popover"
     },
     "styles/quickaction": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/quickaction"
     },
     "styles/radio": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/radio"
     },
     "styles/rating": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/rating"
     },
     "styles/rule": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/rule"
     },
     "styles/search": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/search"
     },
     "styles/searchwithin": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/searchwithin"
     },
     "styles/sidenav": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/sidenav"
     },
     "styles/slider": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/slider"
     },
     "styles/splitbutton": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/splitbutton"
     },
     "styles/splitview": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/splitview"
     },
     "styles/statuslight": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/statuslight"
     },
     "styles/steplist": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/steplist"
     },
     "styles/stepper": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/stepper"
     },
     "styles/table": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/table"
     },
     "styles/tabs": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/tabs"
     },
     "styles/tags": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/tags"
     },
     "styles/textfield": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/textfield"
     },
     "styles/toast": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/toast"
     },
     "styles/toggle": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/toggle"
     },
     "styles/tooltip": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/tooltip"
     },
     "styles/tray": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/tray"
     },
     "styles/treeview": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/treeview"
     },
     "styles/typography": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/typography"
     },
     "styles/underlay": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/underlay"
     },
     "styles/vars": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/vars"
     },
     "styles/well": {
         "scope": "compendium.theme",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/theme/styles/src/well"
     },
     "types": {
         "scope": "compendium.dev",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "libs/dev/types/src"
     },

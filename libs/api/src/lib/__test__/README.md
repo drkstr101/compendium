@@ -1,5 +1,3 @@
-
-
 # API Tests
 
 **NOTICE** The sourcebit global cache is not currently thread safe. Until
